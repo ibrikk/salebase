@@ -4,5 +4,5 @@ CREATE TABLE "order_items" (
   "vendor_id" INTEGER REFERENCES vendors(id) ON DELETE CASCADE,
   "assigned_quantity" INTEGER NOT NULL,
   "price" INTEGER NOT NULL,
-  "order_date" DATE NOT NULL
+  "order_date" DATE NOT NULL,
 );
