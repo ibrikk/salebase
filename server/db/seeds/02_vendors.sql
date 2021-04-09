@@ -1,6 +1,6 @@
 INSERT INTO vendors(vendor_name, city_name, adress)
 VALUES
-('Dispatch', 'Little Italy', '267 Rue Saint-Zotique Ouest')
+('Dispatch', 'Little Italy', '267 Rue Saint-Zotique Ouest'),
 ('Cafe Pista', 'Rosemont', '500 Beaubien'),
 ('Cafe Dei Campi', 'Rosemont', '1360 Boulevard Rosemont'),
 ('Cafe L/Etincelle', 'Rosemont', '1991 Rue Beaubien E'),
