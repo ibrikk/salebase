@@ -11,4 +11,4 @@ VALUES
 ('Hawaiian Coffee', 'Kona Typica', 3300, 270),
 ('Columbian Coffee', 'Maragogype', 3000, 200),
 ('Uganda Coffee', 'Maracatu', 2225, 200),
-('Vietnamese Coffee', 'Geisha', 1750, 200)
+('Vietnamese Coffee', 'Geisha', 1750, 200);
