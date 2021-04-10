@@ -1,31 +1,22 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-
 /* GET home page. */
-router.get('/', function(req, res, next) {
-// let returnPayload = {
+module.exports = (db) => {
+  router.get("/", function (req, res, next) {
+    // let returnPayload = {
 
-// }
+    // }
 
-// // do the sql query here and assign it to another variable
-// const dbReturnValue = db.query(
-//   ``
-// )
-// .then(res => res.rows[0])
+    // // do the sql query here and assign it to another variable
+    // const dbReturnValue = db.query(
+    //   ``
+    // )
+    // .then(res => res.rows[0])
 
-
-
-
-
-
-
-
-
-
-  res.send({
-    text: 'This is a cool homepage!'
+    res.send({
+      text: "This is a cool homepage!",
+    });
   });
-});
-
-module.exports = router;
+  return router;
+};

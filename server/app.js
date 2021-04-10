@@ -1,9 +1,10 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const db = require("./db");
+const db = require("./lib/db");
 const PORT = process.env.PORT || 3001;
 const dbHelpers = require("./helpers/dbHelpers")(db);
 
@@ -11,8 +12,9 @@ const dbHelpers = require("./helpers/dbHelpers")(db);
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 console.log("db connection test", dbParams);
-const db = new Pool(dbParams);
-db.connect((err) => console.log("connected", err));
+console.log("process env", process.env);
+const dataBase = new Pool(dbParams);
+dataBase.connect((err) => console.log("connected", err));
 
 const indexRouter = require("./routes/index");
 const itemsRouter = require("./routes/items");
@@ -21,7 +23,7 @@ const biRouter = require("./routes/bi");
 
 const app = express();
 // const port = normalizePort(process.env.PORT || "3001");
-app.set("port", port);
+app.set("port", PORT);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -34,9 +36,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter(dbHelpers));
-app.use("/items", itemsRouter(dbHelpers));
-app.use("/items-assign", itemsAssignRouter(dbHelpers));
-app.use("/bi", biRouter(dbHelpers));
+// app.use("/items", itemsRouter(dbHelpers));
+// app.use("/items-assign", itemsAssignRouter(dbHelpers));
+// app.use("/bi", biRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

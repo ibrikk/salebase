@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const dbHelpers = require("../helpers/dbHelpers");
 
 /* GET items listing. Homepage */
 router.get("/", function (req, res, next) {
-  res.send("This is the Items route!");
+  res.send(getItems());
 });
 
 /* GET items listing. */
