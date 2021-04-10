@@ -15,14 +15,6 @@ router.get('/', function(req, res, next) {
 // .then(res => res.rows[0])
 
 
-
-
-
-
-
-
-
-
   res.send({
     text: 'This is a cool homepage!'
   });
