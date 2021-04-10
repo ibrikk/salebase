@@ -4,7 +4,7 @@ const dbHelpers = require("../helpers/dbHelpers");
 
 /* GET items listing. Homepage */
 router.get("/", function (req, res, next) {
-  res.send(getItems());
+  res.send("This is the Items route!");
 });
 
 /* GET items listing. */

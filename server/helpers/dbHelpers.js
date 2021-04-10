@@ -39,6 +39,7 @@ const deleteItem = (coffeeName) => {
       console.log(`Cannot delete. Item is in already assigned!!!`);
     } else {
       const deleteSql = `DELETE FROM items WHERE id = $1`;
+      //return db.query
     }
   });
 };
