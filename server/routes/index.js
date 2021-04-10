@@ -4,7 +4,28 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('This is Homepage!');
+// let returnPayload = {
+
+// }
+
+// // do the sql query here and assign it to another variable
+// const dbReturnValue = db.query(
+//   ``
+// )
+// .then(res => res.rows[0])
+
+
+
+
+
+
+
+
+
+
+  res.send({
+    text: 'This is a cool homepage!'
+  });
 });
 
 module.exports = router;

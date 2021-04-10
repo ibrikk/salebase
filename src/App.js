@@ -28,7 +28,7 @@ componentDidMount() {
 axios.get(`http://localhost:3001`)
         .then(res => {
           console.log(res.data)
-          const obj = res.data;
+          const obj = res.data.text;
           this.setState({obj})
         });
 
