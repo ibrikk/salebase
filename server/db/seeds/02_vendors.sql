@@ -47,21 +47,4 @@ VALUES
 ('Caffe San Simeon', 'Little Italy'),
 ('Caffe Italia', 'Little Italy'),
 ('Cafe DAX', 'Little Italy'),
-('The Standard', 'Mile End'),
--- ('Tunnel Espresso Bar', 'Downtown'),
--- ('Humble Lion', 'Downtown'),
--- ('Cafe Myriade', 'Downtown'),
--- ('180g', 'Rosemont'),
--- ('Pikolo Espresso Bar', 'Plateau'),
--- ('Cafe Vasco Da Gamma', 'Downtown'),
--- ('Club Insiders', 'Downtown'),
--- ('Le Cartet', 'Downtown'),
--- ('Cafe Aunja', 'Downtown'),
--- ('MELK Bar', 'Downtown'),
--- ('Cafe DAX', 'Little Italy'),
--- ('Le Falco', 'Mile End'),
--- ('Waxman House', 'Plateau'),+
--- ('Replika', 'Plateau'),
--- ('Larrys', 'Mile End'),
--- ('Nocturne', 'Plateau'),
--- ('Neve', 'Plateau');
+('The Standard', 'Mile End');

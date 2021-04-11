@@ -30,4 +30,4 @@ VALUES
 ('Vietnamese Coffee', 'Robusta', 2100, 340),
 ('Vietnamese Coffee', 'Arabica', 2900, 230),
 ('Vietnamese Coffee', 'Cherry', 2300, 430),
-('Vietnamese Coffee', 'Weasel', 34000, 20),
+('Vietnamese Coffee', 'Weasel', 34000, 20);
