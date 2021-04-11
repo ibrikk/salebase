@@ -5,20 +5,20 @@ const dbHelpers = require("../helpers/dbHelpers");
 module.exports = (db) => {
   /* GET items listing. Homepage */
   router.get("/", function (req, res, next) {
-    res.send("This is the Items route!");
+    res.send({ text: "This is the Items route!" });
   });
 
   /* GET items listing. */
   router.post("/", function (req, res, next) {
-    res.send("This post items route!");
+    res.send({ text: "This post items route!" });
   });
 
   router.put("/:id", function (req, res, next) {
-    res.send("This put items route!");
+    res.send({ text: "This put items route!" });
   });
 
   router.delete("/:id", function (req, res, next) {
-    res.send("This delete items route!");
+    res.send({ text: "This delete items route!" });
   });
   return router;
 };

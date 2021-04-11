@@ -9,7 +9,7 @@ module.exports = (db) => {
 
   /* POST home page. */
   router.post("/", function (req, res, next) {
-    res.send("This is POST Items-Assign Router!");
+    res.send({ text: "This is POST Items-Assign Router!" });
   });
   return router;
 };
