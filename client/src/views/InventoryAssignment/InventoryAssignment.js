@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   CCard,
   CCardBody,
@@ -11,7 +11,7 @@ import {
   // CCol,
   // CProgress,
   // CCallout
-} from '@coreui/react'
+} from "@coreui/react";
 
 const InventoryAssignment = () => {
   return (
@@ -19,13 +19,12 @@ const InventoryAssignment = () => {
       <CCard>
         <CCardBody>
           <CRow>
-          <h3>Inventory Assignment</h3>
+            <h3>Inventory Assignment</h3>
+
           </CRow>
-          </CCardBody>
-          </CCard>
+        </CCardBody>
+      </CCard>
     </>
-    )
-  }
-  export default InventoryAssignment;
-
-
+  );
+};
+export default InventoryAssignment;
