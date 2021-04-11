@@ -11,8 +11,6 @@ const dbHelpers = require("./helpers/dbHelpers")(db);
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
-console.log("db connection test", dbParams);
-console.log("process env", process.env);
 const dataBase = new Pool(dbParams);
 dataBase.connect((err) => console.log("connected", err));
 
@@ -36,9 +34,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter(dbHelpers));
-// app.use("/items", itemsRouter(dbHelpers));
-// app.use("/items-assign", itemsAssignRouter(dbHelpers));
-// app.use("/bi", biRouter(dbHelpers));
+app.use("/items", itemsRouter(dbHelpers));
+app.use("/items-assign", itemsAssignRouter(dbHelpers));
+app.use("/bi", biRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
