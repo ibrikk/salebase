@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
-import axios from 'axios';
+// import axios from 'axios';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -25,12 +25,12 @@ class App extends Component {
   };
 
 componentDidMount() {
-axios.get(`http://localhost:3001`)
-        .then(res => {
-          console.log(res.data)
-          const obj = res.data.text;
-          this.setState({obj})
-        });
+// axios.get(`http://localhost:3001`)
+//         .then(res => {
+//           console.log(res.data)
+//           const obj = res.data.text;
+//           this.setState({obj})
+//         });
 
   }
 
