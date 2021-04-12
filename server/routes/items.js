@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const dbHelpers = require("../helpers/dbHelpers");
 
 module.exports = (db) => {
+  // const dbHelpers = require("../helpers/dbHelpers")(db);
   /* GET items listing. Homepage */
   router.get("/", function (req, res, next) {
-    res.send({ text: "This is the Items route!" });
+    db.getItems().then((response) => {
+      console.log("response", response);
+      res.json({ items: response });
+    });
   });
 
   /* GET items listing. */

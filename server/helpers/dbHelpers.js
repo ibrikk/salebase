@@ -8,7 +8,8 @@
 module.exports = (db) => {
   //Get all items based on item id
   const getItems = () => {
-    const sql = { text: `SELECT * FROM items WHERE id=$1;` };
+    const sql = { text: `SELECT * FROM items;` };
+    // const sql = { text: `SELECT * FROM items WHERE id=$1;` };
 
     return db
       .query(sql)

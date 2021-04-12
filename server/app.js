@@ -1,19 +1,20 @@
 require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const db = require("./lib/db");
 
 const PORT = process.env.PORT || 3002;
-const dbHelpers = require("./helpers/dbHelpers")(db);
 
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const dataBase = new Pool(dbParams);
 dataBase.connect((err) => console.log("connected", err));
+const dbHelpers = require("./helpers/dbHelpers")(dataBase);
 console.log("db connection test", dbParams);
 console.log("process env", process.env);
 // const indexRouter = require("./routes/index");
@@ -23,6 +24,7 @@ const biRouter = require("./routes/bi");
 const vendorList = require("./routes/vendors");
 
 const app = express();
+app.use(cors());
 // const port = normalizePort(process.env.PORT || "3001");
 app.set("port", PORT);
 
