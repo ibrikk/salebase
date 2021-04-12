@@ -41,184 +41,6 @@ const InventoryList = () => {
     });
   }, []);
 
-  const usersData = [
-    {
-      id: 0,
-      name: "John Doe",
-      price: "2018/01/01",
-      quantity: "Guest",
-      cost: "Pending",
-    },
-    {
-      id: 1,
-      name: "Samppa Nori",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Active",
-    },
-    {
-      id: 2,
-      name: "Estavan Lykos",
-      price: "2018/02/01",
-      quantity: "Staff",
-      cost: "Banned",
-    },
-    {
-      id: 3,
-      name: "Chetan Mohamed",
-      price: "2018/02/01",
-      quantity: "Admin",
-      cost: "Inactive",
-    },
-    {
-      id: 4,
-      name: "Derick Maximinus",
-      price: "2018/03/01",
-      quantity: "Member",
-      cost: "Pending",
-    },
-    {
-      id: 5,
-      name: "Friderik Dávid",
-      price: "2018/01/21",
-      quantity: "Staff",
-      cost: "Active",
-    },
-    {
-      id: 6,
-      name: "Yiorgos Avraamu",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Active",
-    },
-    {
-      id: 7,
-      name: "Avram Tarasios",
-      price: "2018/02/01",
-      quantity: "Staff",
-      cost: "Banned",
-    },
-    {
-      id: 8,
-      name: "Quintin Ed",
-      price: "2018/02/01",
-      quantity: "Admin",
-      cost: "Inactive",
-    },
-    {
-      id: 9,
-      name: "Enéas Kwadwo",
-      price: "2018/03/01",
-      quantity: "Member",
-      cost: "Pending",
-    },
-    {
-      id: 10,
-      name: "Agapetus Tadeáš",
-      price: "2018/01/21",
-      quantity: "Staff",
-      cost: "Active",
-    },
-    {
-      id: 11,
-      name: "Carwyn Fachtna",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Active",
-    },
-    {
-      id: 12,
-      name: "Nehemiah Tatius",
-      price: "2018/02/01",
-      quantity: "Staff",
-      cost: "Banned",
-    },
-    {
-      id: 13,
-      name: "Ebbe Gemariah",
-      price: "2018/02/01",
-      quantity: "Admin",
-      cost: "Inactive",
-    },
-    {
-      id: 14,
-      name: "Eustorgios Amulius",
-      price: "2018/03/01",
-      quantity: "Member",
-      cost: "Pending",
-    },
-    {
-      id: 15,
-      name: "Leopold Gáspár",
-      price: "2018/01/21",
-      quantity: "Staff",
-      cost: "Active",
-    },
-    {
-      id: 16,
-      name: "Pompeius René",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Active",
-    },
-    {
-      id: 17,
-      name: "Paĉjo Jadon",
-      price: "2018/02/01",
-      quantity: "Staff",
-      cost: "Banned",
-    },
-    {
-      id: 18,
-      name: "Micheal Mercurius",
-      price: "2018/02/01",
-      quantity: "Admin",
-      cost: "Inactive",
-    },
-    {
-      id: 19,
-      name: "Ganesha Dubhghall",
-      price: "2018/03/01",
-      quantity: "Member",
-      cost: "Pending",
-    },
-    {
-      id: 20,
-      name: "Hiroto Šimun",
-      price: "2018/01/21",
-      quantity: "Staff",
-      cost: "Active",
-    },
-    {
-      id: 21,
-      name: "Vishnu Serghei",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Active",
-    },
-    {
-      id: 22,
-      name: "Zbyněk Phoibos",
-      price: "2018/02/01",
-      quantity: "Staff",
-      cost: "Banned",
-    },
-    {
-      id: 23,
-      name: "Aulus Agmundr",
-      price: "2018/01/01",
-      quantity: "Member",
-      cost: "Pending",
-    },
-    {
-      id: 42,
-      name: "Ford Prefect",
-      price: "2001/05/25",
-      quantity: "Alien",
-      cost: "Don't panic!",
-    },
-  ];
-
   const [details, setDetails] = useState([]);
   // const [items, setItems] = useState(usersData)
 
@@ -235,12 +57,14 @@ const InventoryList = () => {
 
   const fields = [
     { key: "item_name", _style: { width: "40%" } },
-    "price",
-    { key: "quantity", _style: { width: "20%" } },
-    { key: "cost", _style: { width: "20%" } },
+
+    { key: "item_type", _style: { width: "20%" } },
+
+    { key: "cost", label: "Cost/lbs", _style: { width: "20%" } },
+    { key: "total_quantity", _style: { width: "20%" } },
     {
       key: "show_details",
-      label: "",
+      label: "Edit",
       _style: { width: "1%" },
       sorter: false,
       filter: false,
@@ -337,22 +161,6 @@ const InventoryList = () => {
                       {details.includes(index) ? "Hide" : "Show"}
                     </CButton>
                   </td>
-                );
-              },
-              details: (item, index) => {
-                return (
-                  <CCollapse show={details.includes(index)}>
-                    <CCardBody>
-                      <h4>Hello World</h4>
-                      <p className="text-muted">User since: {item.price}</p>
-                      <CButton size="sm" color="info">
-                        User Settings
-                      </CButton>
-                      <CButton size="sm" color="danger" className="ml-1">
-                        Delete
-                      </CButton>
-                    </CCardBody>
-                  </CCollapse>
                 );
               },
             }}
