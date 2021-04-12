@@ -5,10 +5,9 @@ const dbHelpers = require("../helpers/dbHelpers");
 module.exports = (db) => {
   /* GET home page. */
   router.get("/", function (req, res, next) {
-    db.getItems().then((response) => {
-      console.log("response", response);
-      res.json({ items: response });
-    });
+    res.send({
+      text: 'This is the BI route!'
   });
+    });
   return router;
 };
