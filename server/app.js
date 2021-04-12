@@ -16,7 +16,7 @@ const dataBase = new Pool(dbParams);
 dataBase.connect((err) => console.log("connected", err));
 console.log("db connection test", dbParams);
 console.log("process env", process.env);
-const indexRouter = require("./routes/index");
+// const indexRouter = require("./routes/index");
 const itemsRouter = require("./routes/items");
 const itemsAssignRouter = require("./routes/items-assign");
 const biRouter = require("./routes/bi");
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter(dbHelpers));
+// app.use("/", indexRouter(dbHelpers));
 app.use("/items", itemsRouter(dbHelpers));
 app.use("/items-assign", itemsAssignRouter(dbHelpers));
 app.use("/bi", biRouter(dbHelpers));
