@@ -17,9 +17,21 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  //Post items
+  const postItems = () => {
+    const sql = {text: `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4)`}
+
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+  };
+
+
   // Get all vendors based on vendor name
   const getVendors = () => {
-    const sql = { text: `SELECT * FROM vendors WHERE vendor_name = $1;` };
+    const sql = { text: `SELECT vendor_name FROM vendors;` };
+    // const sql = { text: `SELECT * FROM vendors WHERE vendor_name = $1;` };
 
     return db
       .query(sql)
@@ -51,5 +63,25 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
-  return { getItems, getVendors, getOrders, getItemsByVendor };
+
+  const getInventoryAssignments = () => {
+    const sql = {
+      text: `SELECT * FROM order_items;`
+    }
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+  }
+
+  const postInventoryAssignments = () => {
+    const sql = {
+      text: `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
+    }
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+  }
+  return { getItems, postItems, getVendors, getOrders, getItemsByVendor, getInventoryAssignments, postInventoryAssignments };
 };

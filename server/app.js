@@ -19,9 +19,9 @@ console.log("db connection test", dbParams);
 console.log("process env", process.env);
 // const indexRouter = require("./routes/index");
 const itemsRouter = require("./routes/items");
-const itemsAssignRouter = require("./routes/items-assign");
+const getInventoryAssignments = require("./routes/items-assign");
 const biRouter = require("./routes/bi");
-const vendorList = require("./routes/vendors");
+const getVendors = require("./routes/vendors");
 
 const app = express();
 app.use(cors());
@@ -40,9 +40,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/", indexRouter(dbHelpers));
 app.use("/items", itemsRouter(dbHelpers));
-app.use("/items-assign", itemsAssignRouter(dbHelpers));
+app.use("/items-assign", getInventoryAssignments(dbHelpers));
 app.use("/bi", biRouter(dbHelpers));
-// app.use("/vendors", vendorList(dbHelpers));
+app.use("/vendors", getVendors(dbHelpers));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -6,7 +6,11 @@ const dbHelpers = require("../helpers/dbHelpers");
 module.exports = (db) => {
   /* GET items listing. Homepage */
   router.get("/", function (req, res, next) {
-    res.send({ text: "This is the Vendors route!" });
+    db.getVendors().then((response) => {
+      console.log("response", response);
+      res.json({ vendors: response });
+    });
   });
   return router;
 };
+

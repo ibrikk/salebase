@@ -11,17 +11,23 @@ module.exports = (db) => {
     });
   });
 
-  /* GET items listing. */
+  /* POST items listing. */
   router.post("/", function (req, res, next) {
-    res.send({ text: "This post items route!" });
+    db.postItems().then((response) => {
+      console.log("response", response);
+      res.json({ items: response });
+    });
   });
 
   router.put("/:id", function (req, res, next) {
-    res.send({ text: "This put items route!" });
+    db.postItems().then((response) => {
+      console.log("response", response);
+      res.json({ items: response });
+    });
   });
 
-  router.delete("/:id", function (req, res, next) {
-    res.send({ text: "This delete items route!" });
-  });
+  // router.delete("/:id", function (req, res, next) {
+  //   res.send({ text: "This delete items route!" });
+  // });
   return router;
 };

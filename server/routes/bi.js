@@ -5,7 +5,10 @@ const dbHelpers = require("../helpers/dbHelpers");
 module.exports = (db) => {
   /* GET home page. */
   router.get("/", function (req, res, next) {
-    res.send({ text: "This is the Business Intelligence Router!" });
+    db.getItems().then((response) => {
+      console.log("response", response);
+      res.json({ items: response });
+    });
   });
   return router;
 };
