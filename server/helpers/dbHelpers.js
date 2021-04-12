@@ -36,7 +36,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  //Get all item info  for a given vendor
+  //Get all item info  for a given vendor: FETCH
   const getItemsByVendor = () => {
     const sql = {
       text: `SELECT items.*, vendors.vendor_name
