@@ -39,31 +39,31 @@ const InventoryList = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const usersData = [
-    {id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending'},
-    {id: 1, name: 'Samppa Nori', registered: '2018/01/01', role: 'Member', status: 'Active'},
-    {id: 2, name: 'Estavan Lykos', registered: '2018/02/01', role: 'Staff', status: 'Banned'},
-    {id: 3, name: 'Chetan Mohamed', registered: '2018/02/01', role: 'Admin', status: 'Inactive'},
-    {id: 4, name: 'Derick Maximinus', registered: '2018/03/01', role: 'Member', status: 'Pending'},
-    {id: 5, name: 'Friderik Dávid', registered: '2018/01/21', role: 'Staff', status: 'Active'},
-    {id: 6, name: 'Yiorgos Avraamu', registered: '2018/01/01', role: 'Member', status: 'Active'},
-    {id: 7, name: 'Avram Tarasios', registered: '2018/02/01', role: 'Staff', status: 'Banned'},
-    {id: 8, name: 'Quintin Ed', registered: '2018/02/01', role: 'Admin', status: 'Inactive'},
-    {id: 9, name: 'Enéas Kwadwo', registered: '2018/03/01', role: 'Member', status: 'Pending'},
-    {id: 10, name: 'Agapetus Tadeáš', registered: '2018/01/21', role: 'Staff', status: 'Active'},
-    {id: 11, name: 'Carwyn Fachtna', registered: '2018/01/01', role: 'Member', status: 'Active'},
-    {id: 12, name: 'Nehemiah Tatius', registered: '2018/02/01', role: 'Staff', status: 'Banned'},
-    {id: 13, name: 'Ebbe Gemariah', registered: '2018/02/01', role: 'Admin', status: 'Inactive'},
-    {id: 14, name: 'Eustorgios Amulius', registered: '2018/03/01', role: 'Member', status: 'Pending'},
-    {id: 15, name: 'Leopold Gáspár', registered: '2018/01/21', role: 'Staff', status: 'Active'},
-    {id: 16, name: 'Pompeius René', registered: '2018/01/01', role: 'Member', status: 'Active'},
-    {id: 17, name: 'Paĉjo Jadon', registered: '2018/02/01', role: 'Staff', status: 'Banned'},
-    {id: 18, name: 'Micheal Mercurius', registered: '2018/02/01', role: 'Admin', status: 'Inactive'},
-    {id: 19, name: 'Ganesha Dubhghall', registered: '2018/03/01', role: 'Member', status: 'Pending'},
-    {id: 20, name: 'Hiroto Šimun', registered: '2018/01/21', role: 'Staff', status: 'Active'},
-    {id: 21, name: 'Vishnu Serghei', registered: '2018/01/01', role: 'Member', status: 'Active'},
-    {id: 22, name: 'Zbyněk Phoibos', registered: '2018/02/01', role: 'Staff', status: 'Banned'},
-    {id: 23, name: 'Aulus Agmundr', registered: '2018/01/01', role: 'Member', status: 'Pending'},
-    {id: 42, name: 'Ford Prefect', registered: '2001/05/25', role: 'Alien', status: 'Don\'t panic!'}
+    {id: 0, name: 'John Doe', price: '2018/01/01', quantity: 'Guest', cost: 'Pending'},
+    {id: 1, name: 'Samppa Nori', price: '2018/01/01', quantity: 'Member', cost: 'Active'},
+    {id: 2, name: 'Estavan Lykos', price: '2018/02/01', quantity: 'Staff', cost: 'Banned'},
+    {id: 3, name: 'Chetan Mohamed', price: '2018/02/01', quantity: 'Admin', cost: 'Inactive'},
+    {id: 4, name: 'Derick Maximinus', price: '2018/03/01', quantity: 'Member', cost: 'Pending'},
+    {id: 5, name: 'Friderik Dávid', price: '2018/01/21', quantity: 'Staff', cost: 'Active'},
+    {id: 6, name: 'Yiorgos Avraamu', price: '2018/01/01', quantity: 'Member', cost: 'Active'},
+    {id: 7, name: 'Avram Tarasios', price: '2018/02/01', quantity: 'Staff', cost: 'Banned'},
+    {id: 8, name: 'Quintin Ed', price: '2018/02/01', quantity: 'Admin', cost: 'Inactive'},
+    {id: 9, name: 'Enéas Kwadwo', price: '2018/03/01', quantity: 'Member', cost: 'Pending'},
+    {id: 10, name: 'Agapetus Tadeáš', price: '2018/01/21', quantity: 'Staff', cost: 'Active'},
+    {id: 11, name: 'Carwyn Fachtna', price: '2018/01/01', quantity: 'Member', cost: 'Active'},
+    {id: 12, name: 'Nehemiah Tatius', price: '2018/02/01', quantity: 'Staff', cost: 'Banned'},
+    {id: 13, name: 'Ebbe Gemariah', price: '2018/02/01', quantity: 'Admin', cost: 'Inactive'},
+    {id: 14, name: 'Eustorgios Amulius', price: '2018/03/01', quantity: 'Member', cost: 'Pending'},
+    {id: 15, name: 'Leopold Gáspár', price: '2018/01/21', quantity: 'Staff', cost: 'Active'},
+    {id: 16, name: 'Pompeius René', price: '2018/01/01', quantity: 'Member', cost: 'Active'},
+    {id: 17, name: 'Paĉjo Jadon', price: '2018/02/01', quantity: 'Staff', cost: 'Banned'},
+    {id: 18, name: 'Micheal Mercurius', price: '2018/02/01', quantity: 'Admin', cost: 'Inactive'},
+    {id: 19, name: 'Ganesha Dubhghall', price: '2018/03/01', quantity: 'Member', cost: 'Pending'},
+    {id: 20, name: 'Hiroto Šimun', price: '2018/01/21', quantity: 'Staff', cost: 'Active'},
+    {id: 21, name: 'Vishnu Serghei', price: '2018/01/01', quantity: 'Member', cost: 'Active'},
+    {id: 22, name: 'Zbyněk Phoibos', price: '2018/02/01', quantity: 'Staff', cost: 'Banned'},
+    {id: 23, name: 'Aulus Agmundr', price: '2018/01/01', quantity: 'Member', cost: 'Pending'},
+    {id: 42, name: 'Ford Prefect', price: '2001/05/25', quantity: 'Alien', cost: 'Don\'t panic!'}
   ]
 
   const [details, setDetails] = useState([])
@@ -83,9 +83,9 @@ const InventoryList = () => {
 
   const fields = [
     { key: 'name', _style: { width: '40%'} },
-    'registered',
-    { key: 'role', _style: { width: '20%'} },
-    { key: 'status', _style: { width: '20%'} },
+    'price',
+    { key: 'quantity', _style: { width: '20%'} },
+    { key: 'cost', _style: { width: '20%'} },
     {
       key: 'show_details',
       label: '',
@@ -95,8 +95,8 @@ const InventoryList = () => {
     }
   ]
 
-  const getBadge = (status)=>{
-    switch (status) {
+  const getBadge = (cost)=>{
+    switch (cost) {
       case 'Active': return 'success'
       case 'Inactive': return 'secondary'
       case 'Pending': return 'warning'
@@ -166,11 +166,11 @@ const InventoryList = () => {
       sorter
       pagination
       scopedSlots = {{
-        'status':
+        'cost':
           (item)=>(
             <td>
-              <CBadge color={getBadge(item.status)}>
-                {item.status}
+              <CBadge color={getBadge(item.cost)}>
+                {item.cost}
               </CBadge>
             </td>
           ),
@@ -198,7 +198,7 @@ const InventoryList = () => {
                   <h4>
                     {item.username}
                   </h4>
-                  <p className="text-muted">User since: {item.registered}</p>
+                  <p className="text-muted">User since: {item.price}</p>
                   <CButton size="sm" color="info">
                     User Settings
                   </CButton>
