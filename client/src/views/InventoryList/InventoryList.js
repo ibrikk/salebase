@@ -89,9 +89,15 @@ const InventoryList = () => {
   return (
     <>
       <WidgetsDropdown />
+
+      <CButton color="success"
+      onClick={event =>
+        window.location.href='/#/InventoryListEdit'
+      }
+      >ADD+</CButton>
+
       <CCard>
         <CCardBody>
-
           <CDataTable
             items={data}
             fields={fields}
@@ -119,7 +125,7 @@ const InventoryList = () => {
                       shape="square"
                       size="sm"
                       onClick={event =>
-                        window.location.href='/#/InventoryAssignment'
+                        window.location.href='/#/InventoryListEdit'
                       }
                     >
                        {details.includes(index) ? "Hide" : "Edit"}
