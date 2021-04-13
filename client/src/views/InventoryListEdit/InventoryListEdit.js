@@ -30,6 +30,7 @@ import {
 
 const InventoryListEdit = () => {
 
+
   return (
     <div>
       <h1>InventoryListEdit</h1>
