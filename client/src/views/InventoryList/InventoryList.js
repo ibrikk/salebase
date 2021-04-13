@@ -1,10 +1,12 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
 
+
 import {
   CCard,
   CCardBody,
   CRow,
+  CLink,
   // CNavbar,
   // CToggler,
   // CCollapse,
@@ -121,17 +123,16 @@ const InventoryList = () => {
               show_details: (item, index) => {
                 return (
                   <td className="py-2">
+                  <CLink to=`/InventoryListEdit/${id}`>
                     <CButton
                       color="primary"
                       variant="outline"
                       shape="square"
                       size="sm"
-                      onClick={event =>
-                        window.location.href='/#/InventoryListEdit'
-                      }
                     >
                        {details.includes(index) ? "Hide" : "Edit"}
                     </CButton>
+                    </CLink>
                   </td>
                 );
               },
