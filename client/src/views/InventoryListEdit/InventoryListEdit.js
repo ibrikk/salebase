@@ -35,7 +35,12 @@ import {
   // CCallout
 } from "@coreui/react";
 
-const InventoryListEdit = () => {
+const InventoryListEdit = (props) => {
+
+console.log('props.myState')
+console.log(props.myState)
+
+
   return (
     <div>
       <h1>InventoryListEdit</h1>

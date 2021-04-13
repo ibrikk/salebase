@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, } from 'react'
 import {
   Redirect,
   Route,
@@ -15,7 +15,21 @@ const loading = (
   </div>
 )
 
+
 const TheContent = () => {
+
+const myState = {
+  inventoryBeingEdited: null,
+
+}
+
+  const viewCallbackFunction = (viewName, data) => {
+    if (viewName === 'inventoryList') {
+      console.log(data);
+      myState.inventoryBeingEdited = data;
+    }
+}
+
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -30,7 +44,10 @@ const TheContent = () => {
                   name={route.name}
                   render={props => (
                     <CFade>
-                      <route.component {...props} />
+
+                      <route.component {...props}
+                      myState={myState}
+                      callbackFromParents= {viewCallbackFunction}/>
                     </CFade>
                   )} />
               )

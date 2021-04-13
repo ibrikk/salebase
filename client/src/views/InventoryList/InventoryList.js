@@ -1,7 +1,6 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
 
-
 import {
   CCard,
   CCardBody,
@@ -32,7 +31,7 @@ import {
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 
-const InventoryList = () => {
+const InventoryList = (props) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
@@ -88,16 +87,22 @@ const InventoryList = () => {
     }
   };
 
+  const sendParentData = item => {
+    props.callbackFromParents("inventoryList",
+      item
+    )
+    
+  }
+
   return (
     <>
       <WidgetsDropdown />
 
-      <CButton color="success"
-      onClick={event =>
-        window.location.href='/#/InventoryListEdit'
-      }
+      <CButton
+        color="success"
+        onClick={(event) => (window.location.href = "/#/InventoryListEdit")}
       >
-      <strong>ADD+</strong>
+        <strong>ADD+</strong>
       </CButton>
 
       <CCard>
@@ -121,18 +126,22 @@ const InventoryList = () => {
               ),
 
               show_details: (item, index) => {
+                let url = `/InventoryListEdit/${item.id}`;
                 return (
                   <td className="py-2">
-                  <CLink to=`/InventoryListEdit/${id}`>
-                    <CButton
-                      color="primary"
-                      variant="outline"
-                      shape="square"
-                      size="sm"
-                    >
-                       {details.includes(index) ? "Hide" : "Edit"}
-                    </CButton>
-                    </CLink>
+                    {
+                      //<CLink to={url}>}
+                      <CButton
+                        color="primary"
+                        variant="outline"
+                        shape="square"
+                        size="sm"
+                        onClick={ event => {
+                          sendParentData(item)}}
+                      >
+                        {details.includes(index) ? "Hide" : "Edit"}
+                      </CButton>
+                    }
                   </td>
                 );
               },
