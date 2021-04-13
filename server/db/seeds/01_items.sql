@@ -13,7 +13,7 @@ VALUES
 ('Uganda Coffee', 'Maracatu', 450, 200),
 ('Vietnamese Coffee', 'Geisha', 350, 200),
 ('Nicaraguan Coffee', 'Catimor', 300, 340),
-('Brazilian Coffee', 'Catuai', 400, 40),
+('Brazilian Coffee', 'Catuai', 400, 400),
 ('Vietnamese Coffee', 'Excelsea', 450, 400),
 ('Brazilian Coffee', 'Icatu', 450, 300),
 ('Rwanada Coffee', 'Jackson', 450, 190),
@@ -23,11 +23,11 @@ VALUES
 ('Hawaiian Coffee', 'Puna', 500, 200),
 ('Hawaiian Coffee', 'Hamakua', 245, 300),
 ('Hawaiian Coffee', 'Maui', 550, 230),
-('Hawaiian Coffee', 'Molokai', 500, 15),
+('Hawaiian Coffee', 'Molokai', 500, 150),
 ('Hawaiian Coffee', 'Waialua', 550, 240),
 ('Jamaican Coffee', 'High Mountain', 600, 130),
-('Jamaica Coffee', 'Low Mountain', 245, 85),
+('Jamaica Coffee', 'Low Mountain', 245, 300),
 ('Vietnamese Coffee', 'Robusta', 550, 340),
 ('Vietnamese Coffee', 'Arabica', 750, 230),
 ('Vietnamese Coffee', 'Cherry', 700, 430),
-('Vietnamese Coffee', 'Weasel', 550, 20);
+('Vietnamese Coffee', 'Weasel', 550, 200);
