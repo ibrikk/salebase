@@ -94,7 +94,9 @@ const InventoryList = () => {
       onClick={event =>
         window.location.href='/#/InventoryListEdit'
       }
-      >ADD+</CButton>
+      >
+      <strong>ADD+</strong>
+      </CButton>
 
       <CCard>
         <CCardBody>
