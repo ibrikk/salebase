@@ -21,18 +21,35 @@ const TheContent = () => {
 
   const history = useHistory();
 
+//
+//
+// Redux replacement (Shared state)
 const myState = {
   inventoryBeingEdited: null,
-
+  itemList: [],
+  vendorList: [],
 }
 
-  const viewCallbackFunction = (viewName, data) => {
-    if (viewName === 'inventoryList') {
+// This function is used by all child views to be able to talk to the parent
+  const viewCallbackFunction = (action, data) => {
+    if (action === 'dataForInventoryBeingEdited') {
       console.log(data);
       myState.inventoryBeingEdited = data;
       history.push('/InventoryListEdit')
     }
+    if (action === 'updateVendorList') {
+      myState.vendorList = data;
+    }
+    if (action === 'updateItemList') {
+      myState.updateList = data;
+    }
+
+    // if statement here for InvAssignment
+    
 }
+//
+//
+// End: Redux replacement (Shared state)
 
   return (
     <main className="c-main">
@@ -51,7 +68,7 @@ const myState = {
 
                       <route.component {...props}
                       myState={myState}
-                      callbackFromParents= {viewCallbackFunction}/>
+                      dispatchAction = {viewCallbackFunction}/>
                     </CFade>
                   )} />
               )

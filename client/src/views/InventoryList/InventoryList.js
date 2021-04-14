@@ -43,10 +43,11 @@ const InventoryList = (props) => {
     axios.get("http://localhost:3002/items").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
+      props.dispatchAction('updateItemList', res.data.items)
     });
   }, []);
 
-  const [details] = useState([]);
+  //const [details] = useState([]);
   // const [items, setItems] = useState(usersData)
 
   // const toggleDetails = (index) => {
@@ -78,7 +79,7 @@ const InventoryList = (props) => {
 
   const getBadge = (cost) => {
     switch (cost) {
-      case "Active":
+      case cost > 20: //
         return "success";
       case "Inactive":
         return "secondary";
@@ -91,9 +92,9 @@ const InventoryList = (props) => {
     }
   };
 
-  const editButtonPressed = item => {
-    props.callbackFromParents("inventoryList",
-      item
+  const editOrAddButtonPressed = data => {
+    props.dispatchAction("dataForInventoryBeingEdited",
+      data
     )
 
   }
@@ -107,7 +108,7 @@ const InventoryList = (props) => {
       <CButton
         color="success"
         onClick={ event => {
-          editButtonPressed()}}
+          editOrAddButtonPressed()}}
       >
         <strong>ADD+</strong>
       </CButton>
@@ -133,20 +134,18 @@ const InventoryList = (props) => {
               ),
 
               show_details: (item, index) => {
-                let url = `/InventoryListEdit/${item.id}`;
                 return (
                   <td className="py-2">
                     {
-                      //<CLink to={url}>}
                       <CButton
                         color="primary"
                         variant="outline"
                         shape="square"
                         size="sm"
                         onClick={ event => {
-                          editButtonPressed(item)}}
+                          editOrAddButtonPressed(item)}}
                       >
-                        {details.includes(index) ? "Hide" : "Edit"}
+                         Edit
                       </CButton>
                     }
                   </td>
