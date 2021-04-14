@@ -36,28 +36,44 @@ import {
 } from "@coreui/react";
 
 const InventoryAssignmentEdit = (props) => {
-  const [addAssignment, setAddAssignment] = useState([{
-    assigned_quantity: "",
-    price: "",
-    order_date: "",
-    item_id: "",
-    vendor_id: "",
-    id: null,
-  }
+  const [itemInput, setItemInput] = useState([
+    {
+      assigned_quantity: "",
+      price: "",
+      order_date: "",
+      item_id: "",
+      vendor_id: "",
+      id: null,
+    },
   ]);
 
-
+  const [vendorInput, setVendorInput] = useState([
+    {
+      assigned_quantity: "",
+      price: "",
+      order_date: "",
+      item_id: "",
+      vendor_id: "",
+      id: null,
+    },
+  ]);
 
   useEffect(() => {
     axios.get("http://localhost:3002/items").then((res) => {
-      setAddAssignment(res.data.items);
+      setItemInput(res.data.items);
     });
   }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:3002/vendors").then((res) => {
+      setVendorInput(res.data.vendors);
+    });
+  }, []);
+
+  // {console.log(vendorInput)}
 
   return (
     <div>
-      
       <CCard>
         <CCardBody>
           <h1>InventoryAssignmentAdd</h1>
@@ -70,8 +86,9 @@ const InventoryAssignmentEdit = (props) => {
                       Assigned Quantity
                     </CLabel>
                     <CInput
-                      type="text"
                       id="assigned_quantity"
+                      type="text"
+                      key="assigned_quantity"
                       name="assigned_quantity"
                       placeholder="assigned_quantity"
                     />
@@ -95,17 +112,40 @@ const InventoryAssignmentEdit = (props) => {
                       placeholder="order_date"
                     />
                   </CFormGroup>
-                  <select >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
 
-                 <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
+                  <CFormGroup>
+                    <CLabel htmlFor="item">Item</CLabel>
+                    <select
+                      value={itemInput.item_name}
+                      onChange={(e) => setItemInput("item_id", e.target.value)}
+                      name="item"
+                      id="item"
+                    >
+                      {itemInput.map((item) => {
+                        return (
+                          <option value={item.id}>{item.item_name}</option>
+                        );
+                      })}
+                    </select>
+                  </CFormGroup>
+
+                  <CFormGroup>
+                    <CLabel htmlFor="vendor">Vendor</CLabel>
+                    <select
+                      value={vendorInput.vendor_name}
+                      onChange={(e) => setItemInput("item_id", e.target.value)}
+                      name="item"
+                      id="item"
+                    >
+                      {vendorInput.map((vendor) => {
+                        return (
+                          <option value={vendor.id}>
+                            {vendor.vendor_name}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </CFormGroup>
                 </CForm>
               </CCol>
             </CRow>
