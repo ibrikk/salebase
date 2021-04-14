@@ -7,7 +7,7 @@ module.exports = (db) => {
   /* GET items listing. Homepage */
   router.get("/", function (req, res, next) {
     db.getVendors().then((response) => {
-      console.log("response", response);
+      // console.log("response", response);
       res.json({ vendors: response });
     });
   });

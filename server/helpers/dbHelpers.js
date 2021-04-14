@@ -19,17 +19,21 @@ module.exports = (db) => {
 
   //Post items
   const postItems = (req) => {
-    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES (${req.item_name}, ${req.item_type}, ${req.total_quantity}, ${req.cost})`
-
+    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4);`
+    console.log(sql)
+    const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
     return db
-    .query(sql)
+    .query(sql, params)
+
     .then((result) => result.rows)
     .catch((err) => err);
   };
 
   const putItems = (req) => {
-    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4)`
-
+    const sql = `UPDATE items SET item_name = '${req.item_name}', item_type = '${req.item_type}', 
+    total_quantity = '${parseInt(req.total_quantity)}', cost='${parseInt(req.cost)}'
+     WHERE id = '${req.id}'; `
+     // const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
     return db
     .query(sql)
     .then((result) => result.rows)
@@ -92,5 +96,5 @@ module.exports = (db) => {
     .then((result) => result.rows)
     .catch((err) => err);
   }
-  return { getItems, postItems, getVendors, getOrders, getItemsByVendor, getInventoryAssignments, postInventoryAssignments };
+  return { getItems, postItems, putItems, getVendors, getOrders, getItemsByVendor, getInventoryAssignments, postInventoryAssignments };
 };

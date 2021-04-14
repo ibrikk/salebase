@@ -6,13 +6,14 @@ module.exports = (db) => {
   /* GET items listing. Homepage */
   router.get("/", function (req, res, next) {
     db.getItems().then((response) => {
-      console.log("response", response);
+      //console.log("response", response);
       res.json({ items: response });
     });
   });
 
   /* POST items listing. */
   router.post("/", function (req, res, next) {
+    console.log(req)
     db.postItems(req.body).then((response) => {
       console.log("response", response);
       res.json({ items: response });
@@ -21,7 +22,7 @@ module.exports = (db) => {
 
   router.put("/:id", function (req, res, next) {
     db.putItems(req.body).then((response) => {
-      console.log("response", response);
+      //console.log("response", response);
       res.json({ items: response });
     });
   });
