@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, } from 'react'
+import { useHistory } from "react-router-dom";
 import {
   Redirect,
   Route,
@@ -15,7 +16,41 @@ const loading = (
   </div>
 )
 
+
 const TheContent = () => {
+
+  const history = useHistory();
+
+//
+//
+// Redux replacement (Shared state)
+const myState = {
+  inventoryBeingEdited: null,
+  itemList: [],
+  vendorList: [],
+}
+
+// This function is used by all child views to be able to talk to the parent
+  const viewCallbackFunction = (action, data) => {
+    if (action === 'dataForInventoryBeingEdited') {
+      console.log(data);
+      myState.inventoryBeingEdited = data;
+      history.push('/InventoryListEdit')
+    }
+    if (action === 'updateVendorList') {
+      myState.vendorList = data;
+    }
+    if (action === 'updateItemList') {
+      myState.updateList = data;
+    }
+
+    // if statement here for InvAssignment
+    
+}
+//
+//
+// End: Redux replacement (Shared state)
+
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -30,7 +65,10 @@ const TheContent = () => {
                   name={route.name}
                   render={props => (
                     <CFade>
-                      <route.component {...props} />
+
+                      <route.component {...props}
+                      myState={myState}
+                      dispatchAction = {viewCallbackFunction}/>
                     </CFade>
                   )} />
               )
