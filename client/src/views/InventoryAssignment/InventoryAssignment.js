@@ -91,7 +91,7 @@ const InventoryAssignment = () => {
 
       <CButton
         color="success"
-        onClick={(event) => (window.location.href = "/#/InventoryListEdit")}
+        onClick={(event) => (window.location.href = "/#/InventoryAssignmentEdit")}
       >
         <strong>ADD+</strong>
       </CButton>
