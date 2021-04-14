@@ -1,4 +1,5 @@
 import React, { Suspense, } from 'react'
+import { useHistory } from "react-router-dom";
 import {
   Redirect,
   Route,
@@ -18,6 +19,8 @@ const loading = (
 
 const TheContent = () => {
 
+  const history = useHistory();
+
 const myState = {
   inventoryBeingEdited: null,
 
@@ -27,6 +30,7 @@ const myState = {
     if (viewName === 'inventoryList') {
       console.log(data);
       myState.inventoryBeingEdited = data;
+      history.push('/InventoryListEdit')
     }
 }
 

@@ -13,14 +13,14 @@ module.exports = (db) => {
 
   /* POST items listing. */
   router.post("/", function (req, res, next) {
-    db.postItems().then((response) => {
+    db.postItems(req.body).then((response) => {
       console.log("response", response);
       res.json({ items: response });
     });
   });
 
   router.put("/:id", function (req, res, next) {
-    db.postItems().then((response) => {
+    db.putItems(req.body).then((response) => {
       console.log("response", response);
       res.json({ items: response });
     });

@@ -1,5 +1,6 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
+import _ from "lodash";
 
 import {
   // CCard,
@@ -36,10 +37,63 @@ import {
 } from "@coreui/react";
 
 const InventoryListEdit = (props) => {
+  const [state, setState] = useState({
+    cost: "",
+    item_name: "",
+    item_type: "",
+    total_quantity: "",
+    id: null,
+  });
 
-console.log('props.myState')
-console.log(props.myState)
+  useEffect(() => {
+    if (_.get(props, "myState.inventoryBeingEdited", false)) {
+      setState({
+        cost: _.get(props, "myState.inventoryBeingEdited.cost", ""),
+        item_name: _.get(props, "myState.inventoryBeingEdited.item_name", ""),
+        item_type: _.get(props, "myState.inventoryBeingEdited.item_type", ""),
+        total_quantity: _.get(
+          props,
+          "myState.inventoryBeingEdited.total_quantity",
+          ""
+        ),
+        id: _.get(props, "myState.inventoryBeingEdited.id", null),
+      });
+    }
+  }, [props]);
 
+  const save = () => {
+    if (state.id !== null) {
+      axios.put(`http://localhost:3002/items/${state.id}`, state).then((res) => {
+        console.log("put");
+        console.log(res.data);
+      });
+    } else {
+      axios.post("http://localhost:3002/items", state).then((res) => {
+        console.log("post");
+        console.log(res.data);
+      });
+    }
+  };
+
+  const updateState = (inputFieldName, newValue) => {
+    const newState = _.clone(state);
+    switch (inputFieldName) {
+      case "name":
+        newState.item_name = newValue;
+        break;
+      case "type":
+        newState.item_type = newValue;
+        break;
+      case "quantity":
+        newState.total_quantity= newValue;
+        break;
+      case "cost":
+        newState.cost = newValue;
+        break;
+      default:
+    }
+    setState(newState);
+  };
 
   return (
     <div>
@@ -47,45 +101,57 @@ console.log(props.myState)
       <CContainer fluid>
         <CRow>
           <CCol sm="12">
-            <CForm action="" method="post">
+            <CForm>
               <CFormGroup>
-                <CLabel htmlFor="nf-email">Item Name</CLabel>
+                <CLabel htmlFor="name">Item Name</CLabel>
                 <CInput
                   type="text"
-                  id="nf-email"
-                  name="nf-email"
+                  id="name"
+                  name="name"
                   placeholder="Enter Item Name"
-                  autoComplete="email"
+                  value={state.item_name || ""}
+                  onChange={(e) => {
+                    updateState('name', e.target.value)
+                  }}
                 />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Item Type</CLabel>
                 <CInput
                   type="text"
-                  id="nf-password"
-                  name="nf-password"
+                  id="type"
+                  name="type"
                   placeholder="Enter Item Type"
-                  autoComplete="current-password"
+                  value={state.item_type || ""}
+                  onChange={(e) => {
+                    updateState('type', e.target.value)
+                  }}
                 />
               </CFormGroup>
               <CFormGroup>
-                <CLabel htmlFor="nf-password">Quantity</CLabel>
+                <CLabel htmlFor="quantity">Quantity</CLabel>
                 <CInput
                   type="text"
-                  id="nf-password"
-                  name="nf-password"
+                  id="quantity"
+                  name="quantity"
                   placeholder="Enter Quantity"
-                  autoComplete="current-password"
+                  value={state.total_quantity || ""}
+                  onChange={(e) => {
+                    updateState('quantity', e.target.value)
+                  }}
                 />
               </CFormGroup>
               <CFormGroup>
-                <CLabel htmlFor="nf-password">Cost/lbs</CLabel>
+                <CLabel htmlFor="cost">Cost/lbs</CLabel>
                 <CInput
                   type="text"
-                  id="nf-password"
-                  name="nf-password"
+                  id="cost"
+                  name="cost"
                   placeholder="Enter Cost per Pound"
-                  autoComplete="current-password"
+                  value={state.cost || ""}
+                  onChange={(e) => {
+                    updateState('cost', e.target.value)
+                  }}
                 />
               </CFormGroup>
             </CForm>
@@ -94,7 +160,9 @@ console.log(props.myState)
         <CButton
           color="primary"
           style={{ float: "right" }}
-         /* onClick={(event) => (Post to DB  )}  */
+          onClick={() => {
+            save();
+          }}
         >
           <strong>SAVE</strong>
         </CButton>

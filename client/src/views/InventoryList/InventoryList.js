@@ -1,6 +1,7 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
 
+
 import {
   CCard,
   CCardBody,
@@ -34,6 +35,9 @@ const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 const InventoryList = (props) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
+
+
+
 
   useEffect(() => {
     axios.get("http://localhost:3002/items").then((res) => {
@@ -87,12 +91,14 @@ const InventoryList = (props) => {
     }
   };
 
-  const sendParentData = item => {
+  const editButtonPressed = item => {
     props.callbackFromParents("inventoryList",
       item
     )
-    
+
   }
+
+
 
   return (
     <>
@@ -100,7 +106,8 @@ const InventoryList = (props) => {
 
       <CButton
         color="success"
-        onClick={(event) => (window.location.href = "/#/InventoryListEdit")}
+        onClick={ event => {
+          editButtonPressed()}}
       >
         <strong>ADD+</strong>
       </CButton>
@@ -137,7 +144,7 @@ const InventoryList = (props) => {
                         shape="square"
                         size="sm"
                         onClick={ event => {
-                          sendParentData(item)}}
+                          editButtonPressed(item)}}
                       >
                         {details.includes(index) ? "Hide" : "Edit"}
                       </CButton>

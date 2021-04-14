@@ -18,8 +18,17 @@ module.exports = (db) => {
   };
 
   //Post items
-  const postItems = () => {
-    const sql = {text: `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4)`}
+  const postItems = (req) => {
+    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES (${req.item_name}, ${req.item_type}, ${req.total_quantity}, ${req.cost})`
+
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+  };
+
+  const putItems = (req) => {
+    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4)`
 
     return db
     .query(sql)
