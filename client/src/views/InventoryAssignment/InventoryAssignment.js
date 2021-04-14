@@ -1,22 +1,25 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { CChart } from "@coreui/react-chartjs";
 import {
   CCard,
   CCardBody,
   CRow,
-  CNavbar,
-  CToggler,
-  CCollapse,
-  CNavbarNav,
-  CForm,
-  CInput,
+  // CNavbar,
+  // CToggler,
+  // CCollapse,
+  // CNavbarNav,
+  // CForm,
+  // CInput,
   CButton,
-  CDropdown,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownItem,
-  CNavbarBrand,
+  // CDropdown,
+  // CDropdownToggle,
+  // CDropdownMenu,
+  // CDropdownItem,
+  // CNavbarBrand,
   CBadge,
   CDataTable,
+  CProgress,
+  CProgressBar,
 
   // CButtonGroup,
   // CCardFooter,
@@ -25,15 +28,15 @@ import {
   // CProgress,
   // CCallout
 } from "@coreui/react";
-import axios from 'axios';
+
+import axios from "axios";
 
 const InventoryAssignment = () => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/items").then((res) => {
+    axios.get("http://localhost:3002/items-assign").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
     });
@@ -54,18 +57,16 @@ const InventoryAssignment = () => {
   };
 
   const fields = [
-    { key: "item_name", _style: { width: "40%" } },
+    { key: "item_name", label: "Item Name", _style: { width: "40%" } },
 
-    { key: "item_type", _style: { width: "20%" } },
+    { key: "item_type", label: "Item Type", _style: { width: "20%" } },
 
-    { key: "cost", label: "Cost/lbs", _style: { width: "20%" } },
-    { key: "total_quantity", _style: { width: "20%" } },
+    { key: "sum", label: "Assigned Quantity", _style: { width: "20%" } },
+
     {
-      key: "show_details",
-      label: "Edit",
-      _style: { width: "1%" },
-      sorter: false,
-      filter: false,
+      key: "total_quantity",
+      label: "Total Quantity",
+      _style: { width: "20%" },
     },
   ];
 
@@ -84,50 +85,19 @@ const InventoryAssignment = () => {
     }
   };
 
-
-
   return (
     <>
+      
+
+      <CButton
+        color="success"
+        onClick={(event) => (window.location.href = "/#/InventoryListEdit")}
+      >
+        <strong>ADD+</strong>
+      </CButton>
+
       <CCard>
         <CCardBody>
-          <div>
-            <CNavbar expandable="sm" color="info">
-              <CToggler inNavbar onClick={() => setIsOpen(!isOpen)} />
-              <CNavbarBrand>Inventory List</CNavbarBrand>
-              <CCollapse show={isOpen} navbar>
-                <CNavbarNav className="ml-auto">
-                  <CForm inline>
-                    <CInput
-                      className="mr-sm-2"
-                      placeholder="Search"
-                      size="sm"
-                    />
-                    <CButton
-                      color="light"
-                      className="my-2 my-sm-0"
-                      type="submit"
-                    >
-                      Search
-                    </CButton>
-                  </CForm>
-                  <CDropdown inNav>
-                    <CDropdownToggle color="primary">Price</CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem>Low-High</CDropdownItem>
-                      <CDropdownItem>High-Low</CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
-                  <CDropdown inNav>
-                    <CDropdownToggle color="primary">Quantity</CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem>Low-High</CDropdownItem>
-                      <CDropdownItem>High-Low</CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
-                </CNavbarNav>
-              </CCollapse>
-            </CNavbar>
-          </div>
           <CDataTable
             items={data}
             fields={fields}
@@ -145,6 +115,7 @@ const InventoryAssignment = () => {
                   <CBadge color={getBadge(item.cost)}>{item.cost}</CBadge>
                 </td>
               ),
+
               show_details: (item, index) => {
                 return (
                   <td className="py-2">
@@ -153,11 +124,11 @@ const InventoryAssignment = () => {
                       variant="outline"
                       shape="square"
                       size="sm"
-                      onClick={() => {
-                        toggleDetails(index);
-                      }}
+                      onClick={(event) =>
+                        (window.location.href = "/#/InventoryListEdit")
+                      }
                     >
-                      {details.includes(index) ? "Hide" : "Show"}
+                      {details.includes(index) ? "Hide" : "Edit"}
                     </CButton>
                   </td>
                 );
