@@ -30,11 +30,20 @@ import {
 
 const InventoryAssignmentEdit = () => {
 
+const [edit, setEdit] = useState([]);
+
+useEffect(() => {
+  axios.put('http://localhost:3002/items-assign').then((res) => {
+    setEdit(res.data.items)
+  })
+}, []);
+
   return (
     <div>
       <h1>InventoryAssignmentEdit</h1>
     </div>
-  )
-}
+  );
+  };
 
-export default InventoryAssignmentEdit;
+
+  export default InventoryAssignmentEdit;

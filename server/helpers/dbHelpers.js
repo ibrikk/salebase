@@ -132,6 +132,7 @@ module.exports = (db) => {
     getInventoryAssignments,
     postInventoryAssignments,
     joinedInventoryAssignments,
-    biTest
+    biTest,
+    putItems,
   };
 };
