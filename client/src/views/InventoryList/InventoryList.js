@@ -1,10 +1,12 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
 
+
 import {
   CCard,
   CCardBody,
   CRow,
+  CLink,
   // CNavbar,
   // CToggler,
   // CCollapse,
@@ -30,18 +32,22 @@ import {
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 
-const InventoryList = () => {
+const InventoryList = (props) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
+
+
+
 
   useEffect(() => {
     axios.get("http://localhost:3002/items").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
+      props.dispatchAction('updateItemList', res.data.items)
     });
   }, []);
 
-  const [details] = useState([]);
+  //const [details] = useState([]);
   // const [items, setItems] = useState(usersData)
 
   // const toggleDetails = (index) => {
@@ -73,7 +79,7 @@ const InventoryList = () => {
 
   const getBadge = (cost) => {
     switch (cost) {
-      case "Active":
+      case cost > 20: //
         return "success";
       case "Inactive":
         return "secondary";
@@ -86,12 +92,29 @@ const InventoryList = () => {
     }
   };
 
+  const editOrAddButtonPressed = data => {
+    props.dispatchAction("dataForInventoryBeingEdited",
+      data
+    )
+
+  }
+
+
+
   return (
     <>
       <WidgetsDropdown />
+
+      <CButton
+        color="success"
+        onClick={ event => {
+          editOrAddButtonPressed()}}
+      >
+        <strong>ADD+</strong>
+      </CButton>
+
       <CCard>
         <CCardBody>
-
           <CDataTable
             items={data}
             fields={fields}
@@ -113,17 +136,18 @@ const InventoryList = () => {
               show_details: (item, index) => {
                 return (
                   <td className="py-2">
-                    <CButton
-                      color="primary"
-                      variant="outline"
-                      shape="square"
-                      size="sm"
-                      onClick={event =>
-                        window.location.href='/#/InventoryAssignment'
-                      }
-                    >
-                       {details.includes(index) ? "Hide" : "Edit"}
-                    </CButton>
+                    {
+                      <CButton
+                        color="primary"
+                        variant="outline"
+                        shape="square"
+                        size="sm"
+                        onClick={ event => {
+                          editOrAddButtonPressed(item)}}
+                      >
+                         Edit
+                      </CButton>
+                    }
                   </td>
                 );
               },
