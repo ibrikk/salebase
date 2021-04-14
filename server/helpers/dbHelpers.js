@@ -83,5 +83,42 @@ module.exports = (db) => {
     .then((result) => result.rows)
     .catch((err) => err);
   }
-  return { getItems, postItems, getVendors, getOrders, getItemsByVendor, getInventoryAssignments, postInventoryAssignments };
+
+  const joinedInventoryAssignments = () => {
+    const sql = {
+      text: `SELECT SUM(order_items.assigned_quantity), items.item_name, items.item_type, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_name, item_type, total_quantity;`
+    }
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+
+    // const queries = [db.query(`SELECT total_quantity FROM items;`), db.query(`SELECT assigned_quantity FROM order_items;`)];
+
+    // Promise.all(queries)
+    // .then((result) => result[0].rows, result[1].rows)
+    // .catch((err) => err);
+
+  }
+
+  const biTest = () => {
+    const sql = { text: `SELECT assignment_quantity FROM order_items;` };
+
+    return db
+    .query(sql)
+    .then((result) => result.rows)
+    .catch((err) => err);
+  };
+
+  return {
+    getItems,
+    postItems,
+    getVendors,
+    getOrders,
+    getItemsByVendor,
+    getInventoryAssignments,
+    postInventoryAssignments,
+    joinedInventoryAssignments,
+    biTest
+  };
 };

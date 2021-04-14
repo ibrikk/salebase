@@ -4,7 +4,8 @@ const router = express.Router();
 module.exports = (db) => {
   /* GET all items that include both assigned and non assigned. FETCH */
   router.get("/", function (req, res, next) {
-    db.getInventoryAssignments().then((response) => {
+    db.joinedInventoryAssignments().then((response) => {
+      console.log("hi");
       console.log("response", response);
       res.json({ items: response });
     });

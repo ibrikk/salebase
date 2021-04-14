@@ -6,7 +6,7 @@ VALUES
 ('Canadian Coffee', 'Liberica', 650, 400),
 ('Columbian Coffee', 'Bourbon', 550, 140),
 ('Italian Coffee', 'Catimor', 600, 190),
-('Ethiopian Coffee', 'Excelsa', 250, 250),
+('Ethiopian Coffee', 'Excelsa', 250, 450),
 ('Turkish Coffee', 'Arabica', 275, 300),
 ('Hawaiian Coffee', 'Kona Typica', 400, 270),
 ('Columbian Coffee', 'Maragogype', 450, 200),
