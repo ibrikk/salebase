@@ -64,8 +64,6 @@ const InventoryList = (props) => {
   const fields = [
     { key: "item_name", _style: { width: "40%" } },
 
-    { key: "item_type", _style: { width: "20%" } },
-
     { key: "cost", label: "Cost/lbs", _style: { width: "20%" } },
     { key: "total_quantity", _style: { width: "20%" } },
     {

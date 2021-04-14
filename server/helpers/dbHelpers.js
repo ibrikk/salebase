@@ -19,9 +19,9 @@ module.exports = (db) => {
 
   //Post items
   const postItems = (req) => {
-    const sql = `INSERT INTO items (item_name, item_type, total_quantity, cost) VALUES ($1, $2, $3, $4);`
+    const sql = `INSERT INTO items (item_name, total_quantity, cost) VALUES ($1, $2, $3, $4);`
     console.log(sql)
-    const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
+    const params = [req.item_name, parseInt(req.total_quantity), parseInt(req.cost)]
     return db
     .query(sql, params)
 
@@ -30,7 +30,7 @@ module.exports = (db) => {
   };
 
   const putItems = (req) => {
-    const sql = `UPDATE items SET item_name = '${req.item_name}', item_type = '${req.item_type}',
+    const sql = `UPDATE items SET item_name = '${req.item_name}',
     total_quantity = '${parseInt(req.total_quantity)}', cost='${parseInt(req.cost)}'
      WHERE id = '${req.id}'; `
      // const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
@@ -99,7 +99,7 @@ module.exports = (db) => {
 
   const joinedInventoryAssignments = () => {
     const sql = {
-      text: `SELECT SUM(order_items.assigned_quantity), items.item_name, items.item_type, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_name, item_type, total_quantity;`
+      text: `SELECT SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_name, total_quantity;`
     }
     return db
     .query(sql)

@@ -59,8 +59,6 @@ const InventoryAssignment = () => {
   const fields = [
     { key: "item_name", label: "Item Name", _style: { width: "40%" } },
 
-    { key: "item_type", label: "Item Type", _style: { width: "20%" } },
-
     { key: "sum", label: "Assigned Quantity", _style: { width: "20%" } },
 
     {

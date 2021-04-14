@@ -41,7 +41,6 @@ const InventoryListEdit = (props) => {
   const [inputValues, setInputValues] = useState({
     cost: "",
     item_name: "",
-    item_type: "",
     total_quantity: "",
     id: null,
   });
@@ -55,7 +54,6 @@ const InventoryListEdit = (props) => {
       setInputValues({
         cost: _.get(props, "myState.inventoryBeingEdited.cost", ""),
         item_name: _.get(props, "myState.inventoryBeingEdited.item_name", ""),
-        item_type: _.get(props, "myState.inventoryBeingEdited.item_type", ""),
         total_quantity: _.get(
           props,
           "myState.inventoryBeingEdited.total_quantity",
@@ -101,9 +99,6 @@ const InventoryListEdit = (props) => {
       case "name":
         newState.item_name = newValue;
         break;
-      case "type":
-        newState.item_type = newValue;
-        break;
       case "quantity":
         newState.total_quantity = newValue;
         break;
@@ -140,19 +135,6 @@ const InventoryListEdit = (props) => {
                       value={inputValues.item_name || ""}
                       onChange={(e) => {
                         updateState("name", e.target.value);
-                      }}
-                    />
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="nf-password">Item Type</CLabel>
-                    <CInput
-                      type="text"
-                      id="type"
-                      name="type"
-                      placeholder="Enter Item Type"
-                      value={inputValues.item_type || ""}
-                      onChange={(e) => {
-                        updateState("type", e.target.value);
                       }}
                     />
                   </CFormGroup>
