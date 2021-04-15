@@ -22,15 +22,14 @@ const TheContent = () => {
     inventoryBeingEdited: null,
     itemList: [],
     vendorList: [],
-    assignmentBeingAdded: null,
-    assignItemDropdown: [],
-    assignVendorDropdown: [],
+    //assignmentBeingAdded: null,
+    // assignItemDropdown: [],
+    // assignVendorDropdown: [],
   };
 
   // This function is used by all child views to be able to talk to the parent
   const viewCallbackFunction = (action, data) => {
     if (action === "dataForInventoryBeingEdited") {
-      console.log(data);
       myState.inventoryBeingEdited = data;
       history.push("/InventoryListEdit");
     }
@@ -38,18 +37,18 @@ const TheContent = () => {
       myState.vendorList = data;
     }
     if (action === "updateItemList") {
-      myState.updateList = data;
+      myState.itemList = data;
     }
     if (action === "assignmentBeingAdded") {
-      myState.assignmentBeingAdded = data;
+      // myState.assignmentBeingAdded = data;
       history.push("/InventoryAssignmentEdit")
     }
-    if (action === "assignItemDropdown") {
-      myState.assignItemDropdown = data;
-    }
-    if (action === "assignVendorDropdown") {
-      myState.assignVendorDropdown = data;
-    }
+    // if (action === "assignItemDropdown") {
+    //   myState.assignItemDropdown = data;
+    // }
+    // if (action === "assignVendorDropdown") {
+    //   myState.assignVendorDropdown = data;
+    // }
 
     // if statement here for InvAssignment
   };

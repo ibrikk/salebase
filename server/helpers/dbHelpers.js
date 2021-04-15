@@ -43,7 +43,7 @@ module.exports = (db) => {
 
   // Get all vendors based on vendor name
   const getVendors = () => {
-    const sql = { text: `SELECT vendor_name FROM vendors;` };
+    const sql = { text: `SELECT id, vendor_name FROM vendors;` };
     // const sql = { text: `SELECT * FROM vendors WHERE vendor_name = $1;` };
 
     return db

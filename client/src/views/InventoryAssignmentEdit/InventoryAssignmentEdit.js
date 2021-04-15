@@ -36,65 +36,46 @@ import {
 } from "@coreui/react";
 
 const InventoryAssignmentEdit = (props) => {
-  const [inputValues, setInputValues] = useState(
-    {
-      assigned_quantity: "",
-      price: "",
-      order_date: "",
-      item_id: "",
-      vendor_id: "",
-      id: null,
-    },
-  );
+  const [inputValues, setInputValues] = useState({
+    assigned_quantity: "",
+    price: "",
+    order_date: "",
+    item_id: "",
+    vendor_id: "",
+    id: null,
+  });
 
-const [itemDropdown, setItemDropdown] = useState([]);
-const [vendorDropdown, setVendorDropdown] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3002/items").then((res) => {
-      //console.log(res.data.items);
-      setItemDropdown(res.data.items);
-      props.dispatchAction('getAssignItemList', res.data.items)
-    });
-  }, []);
-
-
-  useEffect(() => {
-    axios.get("http://localhost:3002/vendors").then((res) => {
-     // console.log(res.data);
-     setVendorDropdown(res.data.vendors);
-      props.dispatchAction('assignVendorDropdown', res.data.vendors)
-    });
-  }, []);
-
-
-  useEffect(() => {
-    if (_.get(props, "myState.assignmentBeingAdded", false)) {
-      setInputValues({
-        assigned_quantity: _.get(props, "myState.assignmentBeingAdded.assigned_quantity", ""),
-        price: _.get(props, "myState.assignmentBeingAdded.price", ""),
-        order_date: _.get(
-          props,
-          "myState.assignmentBeingAdded.order_date",
-          ""
-        ),
-        item_id: _.get(props, "myState.assignmentBeingAdded.item_id", ""),
-        vendor_id: _.get(props, "myState.assignmentBeingAdded.vendor_id", ""),
-        id: _.get(props, "myState.assignmentBeingAdded.id", null),
-      });
-    }
-  }, []);
-
-  
   const save = () => {
     axios
-    .post(`http://localhost:3002/items/items-assign`, inputValues)
-    .then((res) => {
-      console.log(res.data)
-    })
+      .post(`http://localhost:3002/items/items-assign`, inputValues)
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
 
+  const updateState = (inputFieldName, newValue) => {
+    const newState = _.clone(inputValues);
+    switch (inputFieldName) {
+      case "assigned_quantity":
+        newState.assigned_quantity = newValue;
+        break;
+      case "price":
+        newState.price = newValue;
+        break;
+      case "order_date":
+        newState.order_date = newValue;
+        break;
+      case "item_id":
+        newState.item_id = newValue;
+        break;
+      case "vendor_id":
+        newState.vendor_id = newValue;
+        break;
+      default:
+    }
+    setInputValues(newState);
+  };
 
   return (
     <div>
@@ -106,79 +87,80 @@ const [vendorDropdown, setVendorDropdown] = useState([]);
               <CCol sm="12">
                 <CForm>
                   <CFormGroup>
-                    <CLabel htmlFor="assigned_quantity">
-                      Assigned Quantity
-                    </CLabel>
-                    <CInput
-                      id="assigned_quantity"
-                      type="text"
-                      key="assigned_quantity"
-                      name="assigned_quantity"
-                      placeholder="assigned_quantity"
-                    />
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="price">Price</CLabel>
-                    <CInput
-                      type="text"
-                      id="price"
-                      name="price"
-                      placeholder="Price"
-                    />
-                  </CFormGroup>
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="assigned_quantity">
+                          Assigned Quantity
+                        </CLabel>
+                        <CInput
+                          id="assigned_quantity"
+                          type="text"
+                          name="assigned_quantity"
+                        />
+                      </div>
+                    </div>
 
-                  <CFormGroup>
-                    <CLabel htmlFor="order_date">order_date</CLabel>
-                    <CInput
-                      type="text"
-                      id="order_date"
-                      name="order_date"
-                      placeholder="order_date"
-                    />
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="price">Price</CLabel>
+                        <CInput type="text" id="price" name="price" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="order_date">Order Date</CLabel>
+                        <CInput type="text" id="order_date" name="order_date" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-6">
+                        <CLabel htmlFor="item">Item</CLabel>
+                        <select
+                          value={inputValues.item_id}
+                          onChange={(e) =>
+                            updateState("item_id", e.target.value)
+                          }
+                          name="item"
+                          id="item"
+                        >
+                          {props.myState.itemList.map((item) => {
+                            return (
+                              <option key={item.id} value={item.id}>{item.item_name}</option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                      <div className="col-6">
+                        <CLabel htmlFor="vendor">Vendor</CLabel>
+                        <select
+                          value={inputValues.vendor_id}
+                          onChange={(e) =>
+                            updateState("vendor_id", e.target.value)
+                          }
+                          name="item"
+                          id="item"
+                        >
+                          {props.myState.vendorList.map((vendor) => {
+                            return (
+                              <option key={vendor.id} 
+                              value={vendor.id}>
+                                {vendor.vendor_name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
                   </CFormGroup>
-
-                  <CFormGroup>
-                    <CLabel htmlFor="item">Item</CLabel>
-                    <select
-                      value={inputValues.item_id}
-                      onChange={(e) => setInputValues("item_id", e.target.value)}
-                      name="item"
-                      id="item"
-                    >
-                     {itemDropdown.map((item) => {
-                        return (
-                          <option value={item.id}>{item.item_name}</option>
-                        );
-                      })}
-                    
-                    </select>
-                  </CFormGroup>
-                  {console.log(vendorDropdown)}
-
-                   <CFormGroup>
-                    <CLabel htmlFor="vendor">Vendor</CLabel>
-                    <select
-                      value={vendorDropdown.vendor_name}
-                      onChange={(e) => setInputValues("vendor_name", e.target.value)}
-                      name="item"
-                      id="item"
-                    >
-                      {vendorDropdown.map((vendor) => {
-                        return (
-                          <option value={vendor}>
-                            {vendor.vendor_name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    </CFormGroup> 
                 </CForm>
               </CCol>
             </CRow>
-            <CButton color="primary" style={{ float: "right" }}
-            onClick={() => {
-              save();
-            }}
+            <CButton
+              color="primary"
+              style={{ float: "right" }}
+              onClick={() => {
+                save();
+              }}
             >
               <strong>SAVE</strong>
             </CButton>
@@ -187,7 +169,8 @@ const [vendorDropdown, setVendorDropdown] = useState([]);
       </CCard>
 
       <CCard>
-        <CCardBody></CCardBody>
+        <CCardBody>
+        </CCardBody>
       </CCard>
     </div>
   );

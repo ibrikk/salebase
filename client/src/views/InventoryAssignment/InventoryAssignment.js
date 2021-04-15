@@ -37,29 +37,20 @@ const InventoryAssignment = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:3002/items-assign").then((res) => {
-      //console.log(res.data.items);
-      setData(res.data.items);
-    
+      setData(res.data.items)
+    });
+    axios.get("http://localhost:3002/items").then((res) => {
+      props.dispatchAction('updateItemList', res.data.items)
+    });
+    axios.get("http://localhost:3002/vendors").then((res) => {
+      props.dispatchAction('updateVendorList', res.data.vendors)
     });
   }, []);
 
 
   
 
-
-   const [details, setDetails] = useState([]);
-  // const [items, setItems] = useState(usersData)
-
-  // const toggleDetails = (index) => {
-  //   const position = details.indexOf(index);
-  //   let newDetails = details.slice();
-  //   if (position !== -1) {
-  //     newDetails.splice(position, 1);
-  //   } else {
-  //     newDetails = [...details, index];
-  //   }
-  //   setDetails(newDetails);
-  // };
+  
 
   const fields = [
     { key: "item_name", label: "Item Name", _style: { width: "40%" } },
@@ -73,23 +64,23 @@ const InventoryAssignment = (props) => {
     },
   ];
 
-  const getBadge = (cost) => {
-    switch (cost) {
-      case "Active":
-        return "success";
-      case "Inactive":
-        return "secondary";
-      case "Pending":
-        return "warning";
-      case "Banned":
-        return "danger";
-      default:
-        return "primary";
-    }
-  };
+  // const getBadge = (cost) => {
+  //   switch (cost) {
+  //     case "Active":
+  //       return "success";
+  //     case "Inactive":
+  //       return "secondary";
+  //     case "Pending":
+  //       return "warning";
+  //     case "Banned":
+  //       return "danger";
+  //     default:
+  //       return "primary";
+  //   }
+  // };
 
-  const takeMeToAssignment = data => {
-    props.dispatchAction("assignmentBeingAdded", data)
+  const takeMeToAssignment = () => {
+    props.dispatchAction("assignmentBeingAdded")
   }
 
   return (
@@ -118,29 +109,6 @@ const InventoryAssignment = (props) => {
             hover
             sorter
             pagination
-            scopedSlots={{
-              cost: (item) => (
-                <td>
-                  <CBadge color={getBadge(item.cost)}>{item.cost}</CBadge>
-                </td>
-              ),
-
-              show_details: (item, index) => {
-                return (
-                  <td className="py-2">
-                    <CButton
-                      color="primary"
-                      variant="outline"
-                      shape="square"
-                      size="sm"
-                      
-                    >
-                      {details.includes(index) ? "Hide" : "Edit"}
-                    </CButton>
-                  </td>
-                );
-              },
-            }}
           />
 
           <CRow></CRow>
