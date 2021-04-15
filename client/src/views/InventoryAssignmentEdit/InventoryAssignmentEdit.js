@@ -48,7 +48,11 @@ const InventoryAssignmentEdit = (props) => {
     const vendorList = _.get(props, "myState.vendorList", []);
     const itemList = _.get(props, "myState.itemList", []);
     const itemAssignment = _.get(props, "myState.itemAssignment", []);
-    if (vendorList.length === 0 || itemList.length === 0 || itemAssignment.length === 0) {
+    if (
+      vendorList.length === 0 ||
+      itemList.length === 0 ||
+      itemAssignment.length === 0
+    ) {
       props.dispatchAction("goToInventoryAssignment");
     }
   }, []);
@@ -64,17 +68,15 @@ const InventoryAssignmentEdit = (props) => {
   const getAvailableQuantityByItemId = (itemId) => {
     const itemList = _.get(props, "myState.itemList", []);
     const itemAssignment = _.get(props, "myState.itemAssignment", []);
-    let parsedItemId = parseInt(itemId)
+    let parsedItemId = parseInt(itemId);
     let availableQuantity = 0;
     for (let item of itemList) {
       if (item.id === parsedItemId) {
-        
         availableQuantity = parseInt(item.total_quantity);
       }
     }
     for (let assignment of itemAssignment) {
       if (assignment.item_id === parsedItemId) {
-        
         availableQuantity = availableQuantity - parseInt(assignment.sum);
       }
     }
@@ -83,17 +85,14 @@ const InventoryAssignmentEdit = (props) => {
 
   const getTotalQuantityByItemId = (itemId) => {
     const itemList = _.get(props, "myState.itemList", []);
-    let parsedItemId = parseInt(itemId)
+    let parsedItemId = parseInt(itemId);
     for (let item of itemList) {
       if (item.id === parsedItemId) {
-        
         return parseInt(item.total_quantity);
       }
     }
     return 0;
   };
-
-
 
   const updateState = (inputFieldName, newValue) => {
     const newState = _.clone(inputValues);
@@ -179,19 +178,16 @@ const InventoryAssignmentEdit = (props) => {
                     </div>
                     {inputValues.item_id !== "" && (
                       <div className="row">
-
                         <div className="col-6">
-                        
                           <CLabel>Total Quantity</CLabel>
+                          <p>{getTotalQuantityByItemId(inputValues.item_id)}</p>
+                        </div>
+                        <div className="col-6">
+                          <CLabel>Available Quantity</CLabel>
                           <p>
-                            {getTotalQuantityByItemId(inputValues.item_id)}
+                            {getAvailableQuantityByItemId(inputValues.item_id)}
                           </p>
                         </div>
-                        <div className="col-6"><CLabel>Available Quantity</CLabel>
-                        <p>
-                          {getAvailableQuantityByItemId(inputValues.item_id)}
-                        </p></div>
-
                       </div>
                     )}
                     <div className="row">

@@ -19,27 +19,32 @@ module.exports = (db) => {
 
   //Post items
   const postItems = (req) => {
-    const sql = `INSERT INTO items (item_name, total_quantity, cost) VALUES ($1, $2, $3, $4);`
-    console.log(sql)
-    const params = [req.item_name, parseInt(req.total_quantity), parseInt(req.cost)]
+    const sql = `INSERT INTO items (item_name, total_quantity, cost) VALUES ($1, $2, $3, $4);`;
+    console.log(sql);
+    const params = [
+      req.item_name,
+      parseInt(req.total_quantity),
+      parseInt(req.cost),
+    ];
     return db
-    .query(sql, params)
+      .query(sql, params)
 
-    .then((result) => result.rows)
-    .catch((err) => err);
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const putItems = (req) => {
     const sql = `UPDATE items SET item_name = '${req.item_name}',
-    total_quantity = '${parseInt(req.total_quantity)}', cost='${parseInt(req.cost)}'
-     WHERE id = '${req.id}'; `
-     // const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
+    total_quantity = '${parseInt(req.total_quantity)}', cost='${parseInt(
+      req.cost
+    )}'
+     WHERE id = '${req.id}'; `;
+    // const params = [req.item_name, req.item_type, parseInt(req.total_quantity), parseInt(req.cost)]
     return db
-    .query(sql)
-    .then((result) => result.rows)
-    .catch((err) => err);
+      .query(sql)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
-
 
   // Get all vendors based on vendor name
   const getVendors = () => {
@@ -79,48 +84,60 @@ module.exports = (db) => {
 
   const getInventoryAssignments = () => {
     const sql = {
-      text: `SELECT * FROM order_items;`
-    }
+      text: `SELECT * FROM order_items;`,
+    };
     return db
-    .query(sql)
-    .then((result) => result.rows)
-    .catch((err) => err);
-  }
+      .query(sql)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const postInventoryAssignments = (req) => {
-    const sql = 
-      `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
-      const params = [parseInt(req.item_id), parseInt(req.vendor_id), parseInt(req.assigned_quantity), parseInt(req.price), req.order_date];
+    const sql = `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`;
+    const params = [
+      parseInt(req.item_id),
+      parseInt(req.vendor_id),
+      parseInt(req.assigned_quantity),
+      parseInt(req.price),
+      req.order_date,
+    ];
     return db
-    .query(sql, params)
-    .then((result) => result.rows)
-    .catch((err) => err);
-  }
+      .query(sql, params)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const joinedInventoryAssignments = () => {
     const sql = {
-      text: `SELECT order_items.item_id, SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_id, item_name, total_quantity;`
-    }
+      text: `SELECT order_items.item_id, SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_id, item_name, total_quantity;`,
+    };
     return db
-    .query(sql)
-    .then((result) => result.rows)
-    .catch((err) => err);
+      .query(sql)
+      .then((result) => result.rows)
+      .catch((err) => err);
 
     // const queries = [db.query(`SELECT total_quantity FROM items;`), db.query(`SELECT assigned_quantity FROM order_items;`)];
 
     // Promise.all(queries)
     // .then((result) => result[0].rows, result[1].rows)
     // .catch((err) => err);
+  };
 
-  }
-
-  const biTest = () => {
-    const sql = { text: `SELECT assignment_quantity FROM order_items;` };
+  const getTotalAssignedQtyBI = () => {
+    const sql = {
+      text: `SELECT SUM(order_items.assigned_quantity), items.item_name
+      FROM items
+      INNER JOIN order_items
+      ON order_items.item_id=items.id
+      GROUP BY item_name
+      ORDER BY sum DESC
+      LIMIT 5;`,
+    };
 
     return db
-    .query(sql)
-    .then((result) => result.rows)
-    .catch((err) => err);
+      .query(sql)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   return {
@@ -132,7 +149,7 @@ module.exports = (db) => {
     getInventoryAssignments,
     postInventoryAssignments,
     joinedInventoryAssignments,
-    biTest,
     putItems,
+    getTotalAssignedQtyBI,
   };
 };
