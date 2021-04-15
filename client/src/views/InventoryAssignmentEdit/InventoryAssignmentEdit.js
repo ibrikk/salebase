@@ -47,6 +47,27 @@ const InventoryAssignmentEdit = (props) => {
     },
   );
 
+const [itemDropdown, setItemDropdown] = useState([]);
+const [vendorDropdown, setVendorDropdown] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/items").then((res) => {
+      //console.log(res.data.items);
+      setItemDropdown(res.data.items);
+      props.dispatchAction('getAssignItemList', res.data.items)
+    });
+  }, []);
+
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/vendors").then((res) => {
+     // console.log(res.data);
+     setVendorDropdown(res.data.vendors);
+      props.dispatchAction('assignVendorDropdown', res.data.vendors)
+    });
+  }, []);
+
+
   useEffect(() => {
     if (_.get(props, "myState.assignmentBeingAdded", false)) {
       setInputValues({
@@ -118,37 +139,38 @@ const InventoryAssignmentEdit = (props) => {
                   <CFormGroup>
                     <CLabel htmlFor="item">Item</CLabel>
                     <select
-                      value={inputValues.item_name}
+                      value={inputValues.item_id}
                       onChange={(e) => setInputValues("item_id", e.target.value)}
                       name="item"
                       id="item"
                     >
-                   {/*   {getAssignItemList.map((item) => {
+                     {itemDropdown.map((item) => {
                         return (
                           <option value={item.id}>{item.item_name}</option>
                         );
                       })}
-                      */} 
+                    
                     </select>
                   </CFormGroup>
+                  {console.log(vendorDropdown)}
 
-                  {/*<CFormGroup>
+                   <CFormGroup>
                     <CLabel htmlFor="vendor">Vendor</CLabel>
                     <select
-                      value={getAssignVendorList.vendor_name}
-                      onChange={(e) => setItemInput("item_id", e.target.value)}
+                      value={vendorDropdown.vendor_name}
+                      onChange={(e) => setInputValues("vendor_name", e.target.value)}
                       name="item"
                       id="item"
                     >
-                      {vendorList.map((vendor) => {
+                      {vendorDropdown.map((vendor) => {
                         return (
-                          <option value={vendor.id}>
+                          <option value={vendor}>
                             {vendor.vendor_name}
                           </option>
                         );
                       })}
                     </select>
-                    </CFormGroup> */}
+                    </CFormGroup> 
                 </CForm>
               </CCol>
             </CRow>

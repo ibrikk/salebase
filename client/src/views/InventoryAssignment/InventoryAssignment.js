@@ -39,28 +39,12 @@ const InventoryAssignment = (props) => {
     axios.get("http://localhost:3002/items-assign").then((res) => {
       //console.log(res.data.items);
       setData(res.data.items);
-      
+    
     });
   }, []);
 
 
-  useEffect(() => {
-    axios.get("http://localhost:3002/items").then((res) => {
-      //console.log(res.data.items);
-      setData(res.data.items);
-      props.dispatchAction('getAssignItemList', res.data.items)
-    });
-  }, []);
-
-
-  useEffect(() => {
-    axios.get("http://localhost:3002/vendors").then((res) => {
-      //console.log(res.data.items);
-      setData(res.data.items);
-      props.dispatchAction('assignVendorDropdown', res.data.items)
-    });
-  }, []);
-
+  
 
 
   const [details, setDetails] = useState([]);
