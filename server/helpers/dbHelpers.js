@@ -123,7 +123,7 @@ module.exports = (db) => {
     // .catch((err) => err);
   };
 
-  const getTotalAssignedQtyBI = () => {
+  const getTopItemsBI = () => {
     const sql = {
       text: `SELECT SUM(order_items.assigned_quantity), items.item_name
       FROM items
@@ -150,6 +150,6 @@ module.exports = (db) => {
     postInventoryAssignments,
     joinedInventoryAssignments,
     putItems,
-    getTotalAssignedQtyBI,
+    getTopItemsBI,
   };
 };
