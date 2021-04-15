@@ -22,6 +22,7 @@ const TheContent = () => {
     inventoryBeingEdited: null,
     itemList: [],
     vendorList: [],
+    itemAssignment: [],
     //assignmentBeingAdded: null,
     // assignItemDropdown: [],
     // assignVendorDropdown: [],
@@ -39,6 +40,9 @@ const TheContent = () => {
     if (action === "updateItemList") {
       myState.itemList = data;
     }
+    if (action === "updateItemAssignment") {
+      myState.itemAssignment = data;
+    }
     if (action === "assignmentBeingAdded") {
       // myState.assignmentBeingAdded = data;
       history.push("/InventoryAssignmentEdit")
@@ -47,6 +51,7 @@ const TheContent = () => {
       // myState.assignmentBeingAdded = data;
       history.push("/InventoryAssignment")
     }
+    
     // if (action === "assignItemDropdown") {
     //   myState.assignItemDropdown = data;
     // }

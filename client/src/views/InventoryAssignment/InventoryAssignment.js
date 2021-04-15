@@ -38,6 +38,7 @@ const InventoryAssignment = (props) => {
   useEffect(() => {
     axios.get("http://localhost:3002/items-assign").then((res) => {
       setData(res.data.items)
+      props.dispatchAction('updateItemAssignment', res.data.items)
     });
     axios.get("http://localhost:3002/items").then((res) => {
       props.dispatchAction('updateItemList', res.data.items)

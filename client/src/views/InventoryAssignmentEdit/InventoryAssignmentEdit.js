@@ -45,23 +45,53 @@ const InventoryAssignmentEdit = (props) => {
   });
 
   useEffect(() => {
-    const vendorList = _.get(props, 'myState.vendorList', [])
-    const itemList = _.get(props, 'myState.itemList', [])
-    if (vendorList.length === 0 || itemList.length === 0) {
-      props.dispatchAction('goToInventoryAssignment')
+    const vendorList = _.get(props, "myState.vendorList", []);
+    const itemList = _.get(props, "myState.itemList", []);
+    const itemAssignment = _.get(props, "myState.itemAssignment", []);
+    if (vendorList.length === 0 || itemList.length === 0 || itemAssignment.length === 0) {
+      props.dispatchAction("goToInventoryAssignment");
     }
   }, []);
 
   const save = () => {
-    console.log(inputValues)
-    // axios
-    //   .post(`http://localhost:3002/items/items-assign`, inputValues)
-    //   .then((res) => {
-    //     console.log(res.data);
-
-    //   });
+    axios
+      .post(`http://localhost:3002/items-assign`, inputValues)
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
+  const getAvailableQuantityByItemId = (itemId) => {
+    const itemList = _.get(props, "myState.itemList", []);
+    const itemAssignment = _.get(props, "myState.itemAssignment", []);
+    let parsedItemId = parseInt(itemId)
+    let availableQuantity = 0;
+    for (let item of itemList) {
+      if (item.id === parsedItemId) {
+        
+        availableQuantity = parseInt(item.total_quantity);
+      }
+    }
+    for (let assignment of itemAssignment) {
+      if (assignment.item_id === parsedItemId) {
+        
+        availableQuantity = availableQuantity - parseInt(assignment.sum);
+      }
+    }
+    return availableQuantity;
+  };
+
+  const getTotalQuantityByItemId = (itemId) => {
+    const itemList = _.get(props, "myState.itemList", []);
+    let parsedItemId = parseInt(itemId)
+    for (let item of itemList) {
+      if (item.id === parsedItemId) {
+        
+        return parseInt(item.total_quantity);
+      }
+    }
+    return 0;
+  };
 
 
 
@@ -99,43 +129,6 @@ const InventoryAssignmentEdit = (props) => {
                 <CForm>
                   <CFormGroup>
                     <div className="row">
-                      <div className="col-12">
-                        <CLabel htmlFor="assigned_quantity">
-                          Assigned Quantity
-                        </CLabel>
-                        <CInput
-                          id="assigned_quantity"
-                          type="text"
-                          name="assigned_quantity"
-                          value={inputValues.assigned_quantity}
-                          onChange={(e) => {
-                            updateState("assigned_quantity", e.target.value);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-12">
-                        <CLabel htmlFor="price">Price</CLabel>
-                        <CInput type="text" id="price" name="price"
-                        value={inputValues.price}
-                        onChange={(e) => {
-                          updateState("price", e.target.value);
-                        }} />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-12">
-                        <CLabel htmlFor="order_date">Order Date</CLabel>
-                        <CInput type="text" id="order_date" name="order_date" 
-                        value={inputValues.order_date}
-                        onChange={(e) => {
-                          updateState("order_date", e.target.value);
-                        }}/>
-                      </div>
-                    </div>
-                    <div className="row">
                       <div className="col-6">
                         <label htmlFor="item">Item</label>
                         <select
@@ -153,7 +146,7 @@ const InventoryAssignmentEdit = (props) => {
                           {props.myState.itemList.map((item) => {
                             return (
                               <option key={item.id} value={item.id}>
-                               {item.id} - {item.item_name}
+                                {item.item_name}
                               </option>
                             );
                           })}
@@ -177,11 +170,73 @@ const InventoryAssignmentEdit = (props) => {
                           {props.myState.vendorList.map((vendor) => {
                             return (
                               <option key={vendor.id} value={vendor.id}>
-                              {vendor.id} - {vendor.vendor_name}
+                                {vendor.vendor_name}
                               </option>
                             );
                           })}
                         </select>
+                      </div>
+                    </div>
+                    {inputValues.item_id !== "" && (
+                      <div className="row">
+
+                        <div className="col-6">
+                        
+                          <CLabel>Total Quantity</CLabel>
+                          <p>
+                            {getTotalQuantityByItemId(inputValues.item_id)}
+                          </p>
+                        </div>
+                        <div className="col-6"><CLabel>Available Quantity</CLabel>
+                        <p>
+                          {getAvailableQuantityByItemId(inputValues.item_id)}
+                        </p></div>
+
+                      </div>
+                    )}
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="assigned_quantity">
+                          Assigned Quantity
+                        </CLabel>
+                        <CInput
+                          id="assigned_quantity"
+                          type="text"
+                          name="assigned_quantity"
+                          value={inputValues.assigned_quantity}
+                          onChange={(e) => {
+                            updateState("assigned_quantity", e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="price">Price</CLabel>
+                        <CInput
+                          type="text"
+                          id="price"
+                          name="price"
+                          value={inputValues.price}
+                          onChange={(e) => {
+                            updateState("price", e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-12">
+                        <CLabel htmlFor="order_date">Order Date</CLabel>
+                        <CInput
+                          type="date"
+                          id="order_date"
+                          name="order_date"
+                          value={inputValues.order_date}
+                          onChange={(e) => {
+                            updateState("order_date", e.target.value);
+                          }}
+                        />
                       </div>
                     </div>
                   </CFormGroup>

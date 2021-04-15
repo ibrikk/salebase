@@ -38,7 +38,6 @@ componentDidMount() {
   render() {
     return (
       <Fragment>
-      <h1 style={{'float': 'right'}}>{this.state.obj}</h1>
       <HashRouter>
           <React.Suspense fallback={loading}>
             <Switch>

@@ -87,10 +87,10 @@ module.exports = (db) => {
     .catch((err) => err);
   }
 
-  const postInventoryAssignments = () => {
+  const postInventoryAssignments = (req) => {
     const sql = 
       `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
-      const params = [req.item_id, req.vendor_id, req.assigned_qunatity, req.price, req.order_date];
+      const params = [parseInt(req.item_id), parseInt(req.vendor_id), parseInt(req.assigned_quantity), parseInt(req.price), req.order_date];
     return db
     .query(sql, params)
     .then((result) => result.rows)
@@ -99,7 +99,7 @@ module.exports = (db) => {
 
   const joinedInventoryAssignments = () => {
     const sql = {
-      text: `SELECT SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_name, total_quantity;`
+      text: `SELECT order_items.item_id, SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_id, item_name, total_quantity;`
     }
     return db
     .query(sql)

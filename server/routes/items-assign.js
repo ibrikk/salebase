@@ -13,7 +13,7 @@ module.exports = (db) => {
 
   /* POST an assigned item. INJECT */
   router.post("/", function (req, res, next) {
-    db.postInventoryAssignments().then((response) => {
+    db.postInventoryAssignments(req.body).then((response) => {
       // console.log("response", response);
       res.json({ items: response });
     });
