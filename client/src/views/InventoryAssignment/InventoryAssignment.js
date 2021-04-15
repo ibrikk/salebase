@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CChart } from "@coreui/react-chartjs";
+// import { CChart } from "@coreui/react-chartjs";
 import {
   CCard,
   CCardBody,
@@ -18,8 +18,8 @@ import {
   // CNavbarBrand,
   CBadge,
   CDataTable,
-  CProgress,
-  CProgressBar,
+  // CProgress,
+  // CProgressBar,
 
   // CButtonGroup,
   // CCardFooter,
@@ -32,7 +32,7 @@ import {
 import axios from "axios";
 
 const InventoryAssignment = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -47,19 +47,19 @@ const InventoryAssignment = (props) => {
   
 
 
-  const [details, setDetails] = useState([]);
+   const [details, setDetails] = useState([]);
   // const [items, setItems] = useState(usersData)
 
-  const toggleDetails = (index) => {
-    const position = details.indexOf(index);
-    let newDetails = details.slice();
-    if (position !== -1) {
-      newDetails.splice(position, 1);
-    } else {
-      newDetails = [...details, index];
-    }
-    setDetails(newDetails);
-  };
+  // const toggleDetails = (index) => {
+  //   const position = details.indexOf(index);
+  //   let newDetails = details.slice();
+  //   if (position !== -1) {
+  //     newDetails.splice(position, 1);
+  //   } else {
+  //     newDetails = [...details, index];
+  //   }
+  //   setDetails(newDetails);
+  // };
 
   const fields = [
     { key: "item_name", label: "Item Name", _style: { width: "40%" } },
