@@ -23,9 +23,7 @@ const TheContent = () => {
     itemList: [],
     vendorList: [],
     itemAssignment: [],
-    //assignmentBeingAdded: null,
-    // assignItemDropdown: [],
-    // assignVendorDropdown: [],
+    
   };
 
   // This function is used by all child views to be able to talk to the parent
