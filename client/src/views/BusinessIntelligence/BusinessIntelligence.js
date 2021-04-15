@@ -22,6 +22,7 @@ const pie = {
       data: [5000, 3400, 6000],
       backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+      label: "Top Neighborhood",
     },
   ],
 };
@@ -29,7 +30,7 @@ const bar = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: "My First dataset",
+      label: "Top Revenue Driver",
       backgroundColor: "rgba(255,99,132,0.2)",
       borderColor: "rgba(255,99,132,1)",
       borderWidth: 1,
@@ -43,7 +44,7 @@ const line = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: "Inventory assignments over time",
+      label: "Top Products By Month",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -73,7 +74,6 @@ const BusinessIntelligence = () => {
         <CCardBody>
           <CRow>
             <div className="col-md-6">
-              <h4>Line</h4>
               <div className="chart-wrapper">
                 <CChart
                   type="line"
@@ -84,17 +84,6 @@ const BusinessIntelligence = () => {
               </div>
             </div>
 
-            <div className="col-md-6">
-              <h4>Line</h4>
-              <div className="chart-wrapper">
-                <CChart
-                  type="line"
-                  datasets={pie.datasets}
-                  labels={pie.labels}
-                  //options={options}
-                />
-              </div>
-            </div>
             <div className="col-md-6">
               <div className="chart-wrapper">
                 <CChart
@@ -106,7 +95,6 @@ const BusinessIntelligence = () => {
             </div>
 
             <div className="col-md-6">
-              <h4>Line</h4>
               <div className="bar-wrapper">
                 <CChart
                   type="bar"
@@ -117,7 +105,6 @@ const BusinessIntelligence = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <h4>Line</h4>
               <div className="bar-wrapper">
                 <CChart
                   type="bar"
