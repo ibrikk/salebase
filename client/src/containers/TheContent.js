@@ -23,7 +23,8 @@ const TheContent = () => {
     itemList: [],
     vendorList: [],
     itemAssignment: [],
-    
+    login: '',
+
   };
 
   // This function is used by all child views to be able to talk to the parent
@@ -54,6 +55,7 @@ const TheContent = () => {
       history.push("/InventoryList")
     }
     
+
     // if (action === "assignItemDropdown") {
     //   myState.assignItemDropdown = data;
     // }

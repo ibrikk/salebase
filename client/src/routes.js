@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
+// const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const InventoryList = React.lazy(() => import('./views/InventoryList/InventoryList.js'));
 const InventoryAssignment = React.lazy(() => import('./views/InventoryAssignment/InventoryAssignment.js'));
 const BusinessIntelligence = React.lazy(() => import('./views/BusinessIntelligence/BusinessIntelligence.js'));
 const AboutUs = React.lazy(() => import('./views/AboutUs/AboutUs.js'));
 const InventoryListEdit = React.lazy(() => import('./views/InventoryListEdit/InventoryListEdit.js'));
 const InventoryAssignmentEdit = React.lazy(() => import('./views/InventoryAssignmentEdit/InventoryAssignmentEdit.js'));
+const Login = React.lazy(() => import('./views/login/Login.js'));
 
 
 
@@ -50,13 +51,14 @@ const InventoryAssignmentEdit = React.lazy(() => import('./views/InventoryAssign
 // const User = React.lazy(() => import('./views/users/User'));
 
 const routes = [
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/inventoryList', name: 'InventoryList Dashboard', component: InventoryList },
   { path: '/InventoryAssignment', name: 'InventoryAssignemnt Dashboard', component: InventoryAssignment },
   { path: '/BusinessIntelligence', name: 'Business Intelligence', component: BusinessIntelligence },
   { path: '/AboutUs', name: 'About Us', component: AboutUs },
   { path: '/InventoryListEdit', name: 'InventoryList Edit ', component: InventoryListEdit },
   { path: '/InventoryAssignmentEdit', name: 'InventoryAssignment Edit ', component: InventoryAssignmentEdit },
+  { path: '/login', name: 'Login ', component: Login },
   // { path: '/', exact: true, name: 'Home' },
   // { path: '/theme', name: 'Theme', component: Colors, exact: true },
   // { path: '/theme/colors', name: 'Colors', component: Colors },
