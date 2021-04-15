@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../../scss/style.scss";
 import {
   CCard,
   CCardBody,
@@ -9,7 +9,6 @@ import {
   // CButtonGroup,
   // CCardFooter,
   // CCardHeader,
-  // CCol,
   // CProgress,
   // CCallout
 } from "@coreui/react";
@@ -18,28 +17,82 @@ import { CChart } from "@coreui/react-chartjs";
 import axios from "axios";
 
 const BusinessIntelligence = () => {
+  const [products, setProducts] = useState([]);
+
+  const topItemsMap = (products) => {
+    let arr = [];
+    for (const item of products) {
+      arr.push(item.item_name);
+    }
+    return arr;
+  };
+
+  const topSumMap = (products) => {
+    let array = [];
+    for (const sum of products) {
+      array.push(sum.sum);
+    }
+    return array;
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/bi").then((res) => {
+      // console.log("response", res.data.items);
+      setProducts(res.data.items);
+    });
+    axios.get("http://localhost:3002/bi/neighbourhood").then((res) => {
+      console.log("response", res.data.items);
+      //setProducts(res.data.items);
+    });
+  }, []);
+
   const pie = {
-    labels: ["Cafe Olimpico", "Le Cafe Creme", "Cafe Vito"],
+    labels: ["Ahuntsic", "Rosemont", "Villeray", "Little Italy", "NDG"],
     datasets: [
       {
-        data: [5000, 6000, 500],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        data: [789, 468, 382, 344, 322],
+        backgroundColor: [
+          "#E64040",
+          "#E67d40",
+          "#E6d540",
+          "#82E640",
+          "#40C2E6",
+        ],
+        hoverBackgroundColor: [
+          "#E64040",
+          "#E67d40",
+          "#E6d540",
+          "#82E640",
+          "#40C2E6",
+        ],
         label: "Top Neighborhood",
       },
     ],
   };
+
   const bar = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: topItemsMap(products),
     datasets: [
       {
-        label: "Top Revenue Driver",
-        backgroundColor: "rgba(255,99,132,0.2)",
-        borderColor: "rgba(255,99,132,1)",
+        label: "Top Selling Product",
+        backgroundColor: [
+          "#E64040",
+          "#E67d40",
+          "#E6d540",
+          "#82E640",
+          "#40C2E6",
+        ],
+        borderColor: ["#EBf5f7"],
         borderWidth: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBackgroundColor: [
+          "#E64040",
+          "#E67d40",
+          "#E6d540",
+          "#82E640",
+          "#40C2E6",
+        ],
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: topSumMap(products),
       },
     ],
   };
@@ -50,18 +103,24 @@ const BusinessIntelligence = () => {
         label: "Top Products By Month",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: "#E64040",
+        borderColor: "#E64040",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
-        pointBorderColor: "rgba(75,192,192,1)",
-        pointBackgroundColor: "#fff",
+        pointBorderColor: "#E64040",
+        pointBackgroundColor: "#E64040",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBackgroundColor: "#E64040",
+        pointHoverBorderColor: [
+          "#E64040",
+          "#E67d40",
+          "#E6d540",
+          "#82E640",
+          "#40C2E6",
+        ],
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
@@ -70,7 +129,7 @@ const BusinessIntelligence = () => {
     ],
   };
 
-  const [itemName, setItemName] = useState('');
+  const [itemName, setItemName] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:3002/bi").then((res) => {
@@ -84,49 +143,40 @@ const BusinessIntelligence = () => {
     <>
       <CCard>
         <CCardBody>
-          <CRow>
-            <div className="col-md-6">
-              <div className="chart-wrapper">
-                <CChart
-                  type="line"
-                  datasets={pie.datasets}
-                  labels={pie.labels}
-                  //options={options}
-                />
+          <div className="charts">
+            <CRow>
+              <div className="col-md-8">
+                <div className="chart-wrapper">
+                  <CChart
+                    type="line"
+                    datasets={line.datasets}
+                    labels={line.labels}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="col-md-6">
-              <div className="chart-wrapper">
-                <CChart
-                  type="pie"
-                  datasets={pie.datasets}
-                  labels={pie.labels}
-                />
+              <div className="col-lg-8">
+                <div className="chart-wrapper">
+                  <CChart
+                    type="pie"
+                    datasets={pie.datasets}
+                    labels={pie.labels}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="col-md-6">
-              <div className="bar-wrapper">
-                <CChart
-                  type="bar"
-                  datasets={bar.datasets}
-                  labels={bar.labels}
-                  //options={options}
-                />
+              <div className="col-lg-8">
+                <div className="bar-wrapper">
+                  <CChart
+                    type="bar"
+                    datasets={bar.datasets}
+                    labels={bar.labels}
+                    //options={options}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="bar-wrapper">
-                <CChart
-                  type="bar"
-                  datasets={line.datasets}
-                  labels={pie.labels}
-                  //options={options}
-                />
-              </div>
-            </div>
-          </CRow>
+            </CRow>
+          </div>
         </CCardBody>
       </CCard>
     </>

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {ReactComponent as salebaselogo} from '../assets/icons/salebaselogo.svg'
+
 import {
   CCreateElement,
   CSidebar,
@@ -31,9 +33,11 @@ const TheSidebar = () => {
           className="c-sidebar-brand-full"
           name="logo-negative"
           height={35}
+          logo={salebaselogo}
         />
         <CIcon
           className="c-sidebar-brand-minimized"
+          src={salebaselogo}
           name="sygnet"
           height={35}
         />
