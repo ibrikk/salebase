@@ -20,6 +20,7 @@ import axios from "axios";
 const BusinessIntelligence = () => {
 
   const [products, setProducts] = useState([]);
+  
 
 
   const topItemsMap = products => {
@@ -47,10 +48,8 @@ return array;
       });
     }, []);
 
-
-
   const pie = {
-    labels: ["Cafe Olimpico", "Le Cafe Creme", "Cafe Vito"],
+    labels: ["January", "February", "March", "April", "May"],
     datasets: [
       {
         data: [5000, 6000, 500],
@@ -60,11 +59,12 @@ return array;
       },
     ],
   };
+
   const bar = {
     labels: topItemsMap(products),
     datasets: [
       {
-        label: "Top Product",
+        label: "Top Selling Product",
         backgroundColor: "rgba(255,99,132,0.2)",
         borderColor: "rgba(255,99,132,1)",
         borderWidth: 1,
@@ -101,15 +101,7 @@ return array;
     ],
   };
 
-
-
-
-
   //console.log("itemName", itemName);
-
-
-
-
 // console.log(topItemsMap(products))
 
   return (
@@ -121,9 +113,8 @@ return array;
               <div className="chart-wrapper">
                 <CChart
                   type="line"
-                  datasets={pie.datasets}
-                  labels={pie.labels}
-                  //options={options}
+                  datasets={bar.datasets}
+                  labels={bar.labels}
                 />
               </div>
             </div>
@@ -135,8 +126,10 @@ return array;
                   datasets={pie.datasets}
                   labels={pie.labels}
                 />
+
               </div>
             </div>
+
 
             <div className="col-lg-12">
               <div className="bar-wrapper">
@@ -148,16 +141,7 @@ return array;
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="bar-wrapper">
-                <CChart
-                  type="bar"
-                  datasets={line.datasets}
-                  labels={pie.labels}
-                  //options={options}
-                />
-              </div>
-            </div>
+
           </CRow>
         </CCardBody>
       </CCard>

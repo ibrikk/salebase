@@ -140,6 +140,18 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getTopNeighborhood = () => {
+    const sql = {
+      text: `SELECT SUM(order_items.assigned_quantity), vendors.city_name
+      FROM vendors
+      INNER JOIN order_items
+      ON order_items.vendor_id=vendors.id
+      GROUP BY city_name
+      ORDER BY sum DESC
+      LIMIT 5;`
+    }
+  }
+
   return {
     getItems,
     postItems,
