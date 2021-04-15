@@ -57,7 +57,7 @@ const InventoryAssignmentEdit = (props) => {
     axios
       .post(`http://localhost:3002/items-assign`, inputValues)
       .then((res) => {
-        console.log(res.data);
+        props.dispatchAction("goToInventoryAssignment");
       });
   };
 

@@ -78,16 +78,14 @@ const InventoryListEdit = (props) => {
         .put(`http://localhost:3002/items/${inputValues.id}`, inputValues)
         .then(sleeper(1000))
         .then((res) => {
-          console.log("put");
-          console.log(res.data);
+          props.dispatchAction("goToInventoryList");
           setIsLoading(false);
         });
     } else {
       axios.post("http://localhost:3002/items", inputValues)
       .then(sleeper(1000))
       .then((res) => {
-        console.log("post");
-        console.log(res.data);
+        props.dispatchAction("goToInventoryList");
         setIsLoading(false);
       });
     }

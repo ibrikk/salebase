@@ -18,11 +18,11 @@ import {
   // CNavbarBrand,
   CBadge,
   CDataTable,
-  // CProgress,
-  // CProgressBar,
+  CProgress,
+   CProgressBar,
 
   // CButtonGroup,
-  // CCardFooter,
+  CCardFooter,
   // CCardHeader,
   // CCol,
   // CProgress,
@@ -54,14 +54,16 @@ const InventoryAssignment = (props) => {
   
 
   const fields = [
-    { key: "item_name", label: "Item Name", _style: { width: "40%" } },
+    { key: "item_name", label: "Item Name", _style: { width: "30%" } },
 
-    { key: "sum", label: "Assigned Quantity", _style: { width: "20%" } },
+    { key: "progress", label: "", _style: { width: "50%" } },
+
+    { key: "sum", label: "Assigned Quantity", _style: { width: "10%" } },
 
     {
       key: "total_quantity",
       label: "Total Quantity",
-      _style: { width: "20%" },
+      _style: { width: "10%" },
     },
   ];
 
@@ -84,18 +86,13 @@ const InventoryAssignment = (props) => {
     props.dispatchAction("assignmentBeingAdded")
   }
 
+  let counter = 86
+
   return (
     <>
       
 
-      <CButton
-        color="success"
-        onClick={ event =>{
-          takeMeToAssignment()}
-        }
-      >
-        <strong>ADD+</strong>
-      </CButton>
+      
 
       <CCard>
         <CCardBody>
@@ -110,11 +107,31 @@ const InventoryAssignment = (props) => {
             hover
             sorter
             pagination
+            scopedSlots={{
+              progress: (item) => {
+                const counter = (100 * parseInt(item.sum)) / parseInt(item.total_quantity) 
+                return (
+                <td>
+                <CProgress showPercentage='true' striped color="warning" value={counter} className="mb-1 bg-white" />
+
+                </td>
+              )}}
+            }
           />
 
           <CRow></CRow>
         </CCardBody>
+        <CCardFooter><CButton
+        color="success"
+        onClick={ event =>{
+          takeMeToAssignment()}
+        }
+      >
+        <strong>ADD+</strong>
+      </CButton></CCardFooter>
       </CCard>
+      
+      
     </>
   );
 };
