@@ -42,6 +42,7 @@ const TheContent = () => {
     }
     if (action === "assignmentBeingAdded") {
       myState.assignmentBeingAdded = data;
+      history.push("/InventoryAssignmentEdit")
     }
     if (action === "assignItemDropdown") {
       myState.assignItemDropdown = data;

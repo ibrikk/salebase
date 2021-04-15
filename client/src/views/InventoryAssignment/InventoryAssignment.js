@@ -88,13 +88,19 @@ const InventoryAssignment = (props) => {
     }
   };
 
+  const takeMeToAssignment = data => {
+    props.dispatchAction("assignmentBeingAdded", data)
+  }
+
   return (
     <>
       
 
       <CButton
         color="success"
-        onClick={(event) => (window.location.href = "/#/InventoryAssignmentEdit")}
+        onClick={ event =>{
+          takeMeToAssignment()}
+        }
       >
         <strong>ADD+</strong>
       </CButton>
@@ -127,9 +133,7 @@ const InventoryAssignment = (props) => {
                       variant="outline"
                       shape="square"
                       size="sm"
-                      onClick={(event) =>
-                        (window.location.href = "/#/InventoryListEdit")
-                      }
+                      
                     >
                       {details.includes(index) ? "Hide" : "Edit"}
                     </CButton>
