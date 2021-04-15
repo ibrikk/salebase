@@ -23,8 +23,8 @@ const TheContent = () => {
     itemList: [],
     vendorList: [],
     assignmentBeingAdded: null,
-    getAssignItemList: [],
-    getAssignVendorList: [],
+    assignItemDropdown: [],
+    assignVendorDropdown: [],
   };
 
   // This function is used by all child views to be able to talk to the parent
@@ -43,11 +43,11 @@ const TheContent = () => {
     if (action === "assignmentBeingAdded") {
       myState.assignmentBeingAdded = data;
     }
-    if (action === "getAssignItemList") {
-      myState.getAssignItemList = data;
+    if (action === "assignItemDropdown") {
+      myState.assignItemDropdown = data;
     }
-    if (action === "getAssignVendorList") {
-      myState.getAssignVendorList = data;
+    if (action === "assignVendorDropdown") {
+      myState.assignVendorDropdown = data;
     }
 
     // if statement here for InvAssignment

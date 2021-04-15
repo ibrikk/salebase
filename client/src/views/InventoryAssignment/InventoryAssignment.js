@@ -37,7 +37,7 @@ const InventoryAssignment = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:3002/items-assign").then((res) => {
-      console.log(res.data.items);
+      //console.log(res.data.items);
       setData(res.data.items);
       
     });
@@ -46,7 +46,7 @@ const InventoryAssignment = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:3002/items").then((res) => {
-      console.log(res.data.items);
+      //console.log(res.data.items);
       setData(res.data.items);
       props.dispatchAction('getAssignItemList', res.data.items)
     });
@@ -55,9 +55,9 @@ const InventoryAssignment = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:3002/vendors").then((res) => {
-      console.log(res.data.items);
+      //console.log(res.data.items);
       setData(res.data.items);
-      props.dispatchAction('getAssignVendorList', res.data.items)
+      props.dispatchAction('assignVendorDropdown', res.data.items)
     });
   }, []);
 

@@ -123,15 +123,16 @@ const InventoryAssignmentEdit = (props) => {
                       name="item"
                       id="item"
                     >
-                      {getAssignItemList.map((item) => {
+                   {/*   {getAssignItemList.map((item) => {
                         return (
                           <option value={item.id}>{item.item_name}</option>
                         );
                       })}
+                      */} 
                     </select>
                   </CFormGroup>
 
-                  <CFormGroup>
+                  {/*<CFormGroup>
                     <CLabel htmlFor="vendor">Vendor</CLabel>
                     <select
                       value={getAssignVendorList.vendor_name}
@@ -147,7 +148,7 @@ const InventoryAssignmentEdit = (props) => {
                         );
                       })}
                     </select>
-                  </CFormGroup>
+                    </CFormGroup> */}
                 </CForm>
               </CCol>
             </CRow>
