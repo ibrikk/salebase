@@ -18,6 +18,37 @@ import { CChart } from "@coreui/react-chartjs";
 import axios from "axios";
 
 const BusinessIntelligence = () => {
+
+  const [products, setProducts] = useState([]);
+
+
+  const topItemsMap = products => {
+    let arr = [];
+   for (const item of products) {
+      arr.push(item.item_name)
+
+   }
+    return arr;
+  }
+
+const topSumMap = products => {
+  let array = [];
+for (const sum of products) {
+  array.push(sum.sum)
+}
+return array;
+}
+
+
+    useEffect(() => {
+      axios.get("http://localhost:3002/bi").then((res) => {
+        // console.log("response", res.data.items);
+        setProducts(res.data.items);
+      });
+    }, []);
+
+
+
   const pie = {
     labels: ["Cafe Olimpico", "Le Cafe Creme", "Cafe Vito"],
     datasets: [
@@ -30,16 +61,16 @@ const BusinessIntelligence = () => {
     ],
   };
   const bar = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: topItemsMap(products),
     datasets: [
       {
-        label: "Top Revenue Driver",
+        label: "Top Product",
         backgroundColor: "rgba(255,99,132,0.2)",
         borderColor: "rgba(255,99,132,1)",
         borderWidth: 1,
         hoverBackgroundColor: "rgba(255,99,132,0.4)",
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: topSumMap(products),
       },
     ],
   };
@@ -70,15 +101,16 @@ const BusinessIntelligence = () => {
     ],
   };
 
-  const [itemName, setItemName] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://localhost:3002/bi").then((res) => {
-      console.log("response", res.data.items);
-      setItemName(res.data.items);
-      console.log("itemName", itemName);
-    });
-  }, []);
+
+
+
+  //console.log("itemName", itemName);
+
+
+
+
+// console.log(topItemsMap(products))
 
   return (
     <>
@@ -106,7 +138,7 @@ const BusinessIntelligence = () => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-lg-12">
               <div className="bar-wrapper">
                 <CChart
                   type="bar"

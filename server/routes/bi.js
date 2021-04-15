@@ -5,7 +5,7 @@ const dbHelpers = require("../helpers/dbHelpers");
 module.exports = (db) => {
   /* GET home page. */
   router.get("/", function (req, res, next) {
-    db.getTotalAssignedQtyBI().then((response) => {
+    db.getTopItemsBI().then((response) => {
       console.log("response", response);
       res.json({ items: response });
     });
