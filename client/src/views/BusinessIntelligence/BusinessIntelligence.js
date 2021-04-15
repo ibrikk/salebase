@@ -70,7 +70,7 @@ const BusinessIntelligence = () => {
     ],
   };
 
-  const [itemName, setItemName] = useState([]);
+  const [itemName, setItemName] = useState('');
 
   useEffect(() => {
     axios.get("http://localhost:3002/bi").then((res) => {
