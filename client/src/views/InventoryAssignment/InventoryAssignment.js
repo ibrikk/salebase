@@ -31,7 +31,7 @@ import {
 
 import axios from "axios";
 
-const InventoryAssignment = () => {
+const InventoryAssignment = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
@@ -48,6 +48,7 @@ const InventoryAssignment = () => {
     axios.get("http://localhost:3002/items").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
+      props.dispatchAction('getAssignItemList', res.data.items)
     });
   }, []);
 
@@ -56,6 +57,7 @@ const InventoryAssignment = () => {
     axios.get("http://localhost:3002/vendors").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
+      props.dispatchAction('getAssignVendorList', res.data.items)
     });
   }, []);
 

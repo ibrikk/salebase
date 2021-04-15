@@ -88,11 +88,11 @@ module.exports = (db) => {
   }
 
   const postInventoryAssignments = () => {
-    const sql = {
-      text: `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
-    }
+    const sql = 
+      `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
+      const params = [req.item_id, req.vendor_id, req.assigned_qunatity, req.price, req.order_date];
     return db
-    .query(sql)
+    .query(sql, params)
     .then((result) => result.rows)
     .catch((err) => err);
   }

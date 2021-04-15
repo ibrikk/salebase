@@ -1,6 +1,6 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
-
+import _ from "lodash";
 import {
   CCard,
   CCardBody,
@@ -47,7 +47,32 @@ const InventoryAssignmentEdit = (props) => {
     },
   );
 
+  useEffect(() => {
+    if (_.get(props, "myState.assignmentBeingAdded", false)) {
+      setInputValues({
+        assigned_quantity: _.get(props, "myState.assignmentBeingAdded.assigned_quantity", ""),
+        price: _.get(props, "myState.assignmentBeingAdded.price", ""),
+        order_date: _.get(
+          props,
+          "myState.assignmentBeingAdded.order_date",
+          ""
+        ),
+        item_id: _.get(props, "myState.assignmentBeingAdded.item_id", ""),
+        vendor_id: _.get(props, "myState.assignmentBeingAdded.vendor_id", ""),
+        id: _.get(props, "myState.assignmentBeingAdded.id", null),
+      });
+    }
+  }, []);
   
+  const save = () => {
+    axios
+    .post(`http://localhost:3002/items/items-assign`, inputValues)
+    .then((res) => {
+      console.log(res.data)
+    })
+  };
+
+
 
   return (
     <div>
@@ -98,7 +123,7 @@ const InventoryAssignmentEdit = (props) => {
                       name="item"
                       id="item"
                     >
-                      {itemList.map((item) => {
+                      {getAssignItemList.map((item) => {
                         return (
                           <option value={item.id}>{item.item_name}</option>
                         );
@@ -109,7 +134,7 @@ const InventoryAssignmentEdit = (props) => {
                   <CFormGroup>
                     <CLabel htmlFor="vendor">Vendor</CLabel>
                     <select
-                      value={vendorInput.vendor_name}
+                      value={getAssignVendorList.vendor_name}
                       onChange={(e) => setItemInput("item_id", e.target.value)}
                       name="item"
                       id="item"
@@ -126,7 +151,11 @@ const InventoryAssignmentEdit = (props) => {
                 </CForm>
               </CCol>
             </CRow>
-            <CButton color="primary" style={{ float: "right" }}>
+            <CButton color="primary" style={{ float: "right" }}
+            onClick={() => {
+              save();
+            }}
+            >
               <strong>SAVE</strong>
             </CButton>
           </CContainer>
