@@ -135,6 +135,8 @@ const InventoryList = (props) => {
               },
             }}
           />
+
+
         </CCardBody>
         <CCardFooter>
           <CButton
