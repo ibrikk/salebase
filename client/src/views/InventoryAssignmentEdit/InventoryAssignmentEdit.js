@@ -36,7 +36,7 @@ import {
 } from "@coreui/react";
 
 const InventoryAssignmentEdit = (props) => {
-  const [itemInput, setItemInput] = useState([
+  const [inputValues, setInputValues] = useState(
     {
       assigned_quantity: "",
       price: "",
@@ -45,32 +45,9 @@ const InventoryAssignmentEdit = (props) => {
       vendor_id: "",
       id: null,
     },
-  ]);
+  );
 
-  const [vendorInput, setVendorInput] = useState([
-    {
-      assigned_quantity: "",
-      price: "",
-      order_date: "",
-      item_id: "",
-      vendor_id: "",
-      id: null,
-    },
-  ]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3002/items").then((res) => {
-      setItemInput(res.data.items);
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get("http://localhost:3002/vendors").then((res) => {
-      setVendorInput(res.data.vendors);
-    });
-  }, []);
-
-  // {console.log(vendorInput)}
+  
 
   return (
     <div>
@@ -116,12 +93,12 @@ const InventoryAssignmentEdit = (props) => {
                   <CFormGroup>
                     <CLabel htmlFor="item">Item</CLabel>
                     <select
-                      value={itemInput.item_name}
-                      onChange={(e) => setItemInput("item_id", e.target.value)}
+                      value={inputValues.item_name}
+                      onChange={(e) => setInputValues("item_id", e.target.value)}
                       name="item"
                       id="item"
                     >
-                      {itemInput.map((item) => {
+                      {itemList.map((item) => {
                         return (
                           <option value={item.id}>{item.item_name}</option>
                         );
@@ -137,7 +114,7 @@ const InventoryAssignmentEdit = (props) => {
                       name="item"
                       id="item"
                     >
-                      {vendorInput.map((vendor) => {
+                      {vendorList.map((vendor) => {
                         return (
                           <option value={vendor.id}>
                             {vendor.vendor_name}

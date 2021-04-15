@@ -29,6 +29,7 @@ const myState = {
   itemList: [],
   vendorList: [],
   assignmentBeingAdded: null,
+
 }
 
 // This function is used by all child views to be able to talk to the parent
@@ -47,6 +48,7 @@ const myState = {
     if (action === 'assignmentBeingAdded') {
       myState.assignmentBeingAdded = data;
     }
+    if(action === '')
 
     // if statement here for InvAssignment
     
