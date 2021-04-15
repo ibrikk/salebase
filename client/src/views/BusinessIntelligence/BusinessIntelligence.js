@@ -25,7 +25,20 @@ const pie = {
     },
   ],
 };
-
+const bar = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "My First dataset",
+      backgroundColor: "rgba(255,99,132,0.2)",
+      borderColor: "rgba(255,99,132,1)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+  ],
+};
 const line = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
@@ -59,7 +72,29 @@ const BusinessIntelligence = () => {
       <CCard>
         <CCardBody>
           <CRow>
-            <h3>Business Intelligence</h3>
+            <div className="col-md-6">
+              <h4>Line</h4>
+              <div className="chart-wrapper">
+                <CChart
+                  type="line"
+                  datasets={pie.datasets}
+                  labels={pie.labels}
+                  //options={options}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <h4>Line</h4>
+              <div className="chart-wrapper">
+                <CChart
+                  type="line"
+                  datasets={pie.datasets}
+                  labels={pie.labels}
+                  //options={options}
+                />
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="chart-wrapper">
                 <CChart
@@ -72,11 +107,22 @@ const BusinessIntelligence = () => {
 
             <div className="col-md-6">
               <h4>Line</h4>
-              <div className="chart-wrapper">
+              <div className="bar-wrapper">
                 <CChart
-                  type="line"
+                  type="bar"
+                  datasets={bar.datasets}
+                  labels={bar.labels}
+                  //options={options}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <h4>Line</h4>
+              <div className="bar-wrapper">
+                <CChart
+                  type="bar"
                   datasets={line.datasets}
-                  labels={line.labels}
+                  labels={pie.labels}
                   //options={options}
                 />
               </div>
