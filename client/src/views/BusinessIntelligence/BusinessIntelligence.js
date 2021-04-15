@@ -20,7 +20,7 @@ import axios from "axios";
 const BusinessIntelligence = () => {
 
   const [products, setProducts] = useState([]);
-  
+
 
 
   const topItemsMap = products => {
@@ -46,15 +46,19 @@ return array;
         // console.log("response", res.data.items);
         setProducts(res.data.items);
       });
+      axios.get("http://localhost:3002/bi/neighbourhood").then((res) => {
+        console.log("response", res.data.items);
+        //setProducts(res.data.items);
+      });
     }, []);
 
   const pie = {
-    labels: ["January", "February", "March", "April", "May"],
+    labels: ["Ahuntsic", "Rosemont", "Villeray", "Little Italy", "NDG"],
     datasets: [
       {
-        data: [5000, 6000, 500],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        data: [789, 468, 382, 344, 322],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB",],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB"],
         label: "Top Neighborhood",
       },
     ],

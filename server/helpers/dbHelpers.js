@@ -163,5 +163,6 @@ module.exports = (db) => {
     joinedInventoryAssignments,
     putItems,
     getTopItemsBI,
+    getTopNeighborhood
   };
 };
