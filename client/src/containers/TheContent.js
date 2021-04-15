@@ -43,6 +43,10 @@ const TheContent = () => {
       // myState.assignmentBeingAdded = data;
       history.push("/InventoryAssignmentEdit")
     }
+    if (action === "goToInventoryAssignment") {
+      // myState.assignmentBeingAdded = data;
+      history.push("/InventoryAssignment")
+    }
     // if (action === "assignItemDropdown") {
     //   myState.assignItemDropdown = data;
     // }

@@ -28,8 +28,8 @@ import {
   CFormGroup,
   // CFormText,
   // CButtonGroup,
-  // CCardFooter,
-  // CCardHeader,
+  CCardFooter,
+  CCardHeader,
   // CCol,
   // CProgress,
   // CCallout
@@ -42,16 +42,27 @@ const InventoryAssignmentEdit = (props) => {
     order_date: "",
     item_id: "",
     vendor_id: "",
-    id: null,
   });
 
+  useEffect(() => {
+    const vendorList = _.get(props, 'myState.vendorList', [])
+    const itemList = _.get(props, 'myState.itemList', [])
+    if (vendorList.length === 0 || itemList.length === 0) {
+      props.dispatchAction('goToInventoryAssignment')
+    }
+  }, []);
+
   const save = () => {
-    axios
-      .post(`http://localhost:3002/items/items-assign`, inputValues)
-      .then((res) => {
-        console.log(res.data);
-      });
+    console.log(inputValues)
+    // axios
+    //   .post(`http://localhost:3002/items/items-assign`, inputValues)
+    //   .then((res) => {
+    //     console.log(res.data);
+
+    //   });
   };
+
+
 
 
   const updateState = (inputFieldName, newValue) => {
@@ -80,8 +91,8 @@ const InventoryAssignmentEdit = (props) => {
   return (
     <div>
       <CCard>
+        <CCardHeader>Inventory Assignment Addition</CCardHeader>
         <CCardBody>
-          <h1>InventoryAssignmentAdd</h1>
           <CContainer fluid>
             <CRow>
               <CCol sm="12">
@@ -96,6 +107,10 @@ const InventoryAssignmentEdit = (props) => {
                           id="assigned_quantity"
                           type="text"
                           name="assigned_quantity"
+                          value={inputValues.assigned_quantity}
+                          onChange={(e) => {
+                            updateState("assigned_quantity", e.target.value);
+                          }}
                         />
                       </div>
                     </div>
@@ -103,19 +118,28 @@ const InventoryAssignmentEdit = (props) => {
                     <div className="row">
                       <div className="col-12">
                         <CLabel htmlFor="price">Price</CLabel>
-                        <CInput type="text" id="price" name="price" />
+                        <CInput type="text" id="price" name="price"
+                        value={inputValues.price}
+                        onChange={(e) => {
+                          updateState("price", e.target.value);
+                        }} />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-12">
                         <CLabel htmlFor="order_date">Order Date</CLabel>
-                        <CInput type="text" id="order_date" name="order_date" />
+                        <CInput type="text" id="order_date" name="order_date" 
+                        value={inputValues.order_date}
+                        onChange={(e) => {
+                          updateState("order_date", e.target.value);
+                        }}/>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-6">
-                        <CLabel htmlFor="item">Item</CLabel>
+                        <label htmlFor="item">Item</label>
                         <select
+                          className="custom-select"
                           value={inputValues.item_id}
                           onChange={(e) =>
                             updateState("item_id", e.target.value)
@@ -123,16 +147,23 @@ const InventoryAssignmentEdit = (props) => {
                           name="item"
                           id="item"
                         >
+                          <option value={""} key="blank">
+                            Select
+                          </option>
                           {props.myState.itemList.map((item) => {
                             return (
-                              <option key={item.id} value={item.id}>{item.item_name}</option>
+                              <option key={item.id} value={item.id}>
+                               {item.id} - {item.item_name}
+                              </option>
                             );
                           })}
                         </select>
                       </div>
                       <div className="col-6">
-                        <CLabel htmlFor="vendor">Vendor</CLabel>
+                        <label htmlFor="vendor">Vendor</label>
+
                         <select
+                          className="custom-select"
                           value={inputValues.vendor_id}
                           onChange={(e) =>
                             updateState("vendor_id", e.target.value)
@@ -140,11 +171,13 @@ const InventoryAssignmentEdit = (props) => {
                           name="item"
                           id="item"
                         >
+                          <option value={""} key="blank">
+                            Select
+                          </option>
                           {props.myState.vendorList.map((vendor) => {
                             return (
-                              <option key={vendor.id} 
-                              value={vendor.id}>
-                                {vendor.vendor_name}
+                              <option key={vendor.id} value={vendor.id}>
+                              {vendor.id} - {vendor.vendor_name}
                               </option>
                             );
                           })}
@@ -155,22 +188,23 @@ const InventoryAssignmentEdit = (props) => {
                 </CForm>
               </CCol>
             </CRow>
-            <CButton
-              color="primary"
-              style={{ float: "right" }}
-              onClick={() => {
-                save();
-              }}
-            >
-              <strong>SAVE</strong>
-            </CButton>
           </CContainer>
         </CCardBody>
+        <CCardFooter>
+          <CButton
+            color="primary"
+            style={{ float: "right" }}
+            onClick={() => {
+              save();
+            }}
+          >
+            <strong>SAVE</strong>
+          </CButton>
+        </CCardFooter>
       </CCard>
 
       <CCard>
-        <CCardBody>
-        </CCardBody>
+        <CCardBody></CCardBody>
       </CCard>
     </div>
   );
