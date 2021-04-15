@@ -1,7 +1,6 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
 
-
 import {
   CCard,
   CCardBody,
@@ -23,7 +22,7 @@ import {
   CDataTable,
 
   // CButtonGroup,
-  // CCardFooter,
+  CCardFooter,
   // CCardHeader,
   // CCol,
   // CProgress,
@@ -36,14 +35,11 @@ const InventoryList = (props) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
-
-
-
   useEffect(() => {
     axios.get("http://localhost:3002/items").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);
-      props.dispatchAction('updateItemList', res.data.items)
+      props.dispatchAction("updateItemList", res.data.items);
     });
   }, []);
 
@@ -90,26 +86,13 @@ const InventoryList = (props) => {
     }
   };
 
-  const editOrAddButtonPressed = data => {
-    props.dispatchAction("dataForInventoryBeingEdited",
-      data
-    )
-
-  }
-
-
+  const editOrAddButtonPressed = (data) => {
+    props.dispatchAction("dataForInventoryBeingEdited", data);
+  };
 
   return (
     <>
       <WidgetsDropdown />
-
-      <CButton
-        color="success"
-        onClick={ event => {
-          editOrAddButtonPressed()}}
-      >
-        <strong>ADD+</strong>
-      </CButton>
 
       <CCard>
         <CCardBody>
@@ -140,10 +123,11 @@ const InventoryList = (props) => {
                         variant="outline"
                         shape="square"
                         size="sm"
-                        onClick={ event => {
-                          editOrAddButtonPressed(item)}}
+                        onClick={(event) => {
+                          editOrAddButtonPressed(item);
+                        }}
                       >
-                         Edit
+                        Edit
                       </CButton>
                     }
                   </td>
@@ -152,8 +136,18 @@ const InventoryList = (props) => {
             }}
           />
 
-          <CRow></CRow>
+          
         </CCardBody>
+        <CCardFooter>
+          <CButton
+            color="success"
+            onClick={(event) => {
+              editOrAddButtonPressed();
+            }}
+          >
+            <strong>ADD+</strong>
+          </CButton>
+        </CCardFooter>
       </CCard>
     </>
   );

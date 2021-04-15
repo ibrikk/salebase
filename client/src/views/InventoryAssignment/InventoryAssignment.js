@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CChart } from "@coreui/react-chartjs";
+// import { CChart } from "@coreui/react-chartjs";
 import {
   CCard,
   CCardBody,
@@ -19,10 +19,10 @@ import {
   CBadge,
   CDataTable,
   CProgress,
-  CProgressBar,
+   CProgressBar,
 
   // CButtonGroup,
-  // CCardFooter,
+  CCardFooter,
   // CCardHeader,
   // CCol,
   // CProgress,
@@ -31,68 +31,68 @@ import {
 
 import axios from "axios";
 
-const InventoryAssignment = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const InventoryAssignment = (props) => {
+  // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3002/items-assign").then((res) => {
-      console.log(res.data.items);
-      setData(res.data.items);
+      setData(res.data.items)
+      props.dispatchAction('updateItemAssignment', res.data.items)
+    });
+    axios.get("http://localhost:3002/items").then((res) => {
+      props.dispatchAction('updateItemList', res.data.items)
+    });
+    axios.get("http://localhost:3002/vendors").then((res) => {
+      props.dispatchAction('updateVendorList', res.data.vendors)
     });
   }, []);
 
-  const [details, setDetails] = useState([]);
-  // const [items, setItems] = useState(usersData)
 
-  const toggleDetails = (index) => {
-    const position = details.indexOf(index);
-    let newDetails = details.slice();
-    if (position !== -1) {
-      newDetails.splice(position, 1);
-    } else {
-      newDetails = [...details, index];
-    }
-    setDetails(newDetails);
-  };
+  
+
+  
 
   const fields = [
-    { key: "item_name", label: "Item Name", _style: { width: "40%" } },
+    { key: "item_name", label: "Item Name", _style: { width: "30%" } },
 
-    { key: "sum", label: "Assigned Quantity", _style: { width: "20%" } },
+    { key: "progress", label: "", _style: { width: "50%" } },
+
+    { key: "sum", label: "Assigned Quantity", _style: { width: "10%" } },
 
     {
       key: "total_quantity",
       label: "Total Quantity",
-      _style: { width: "20%" },
+      _style: { width: "10%" },
     },
   ];
 
-  const getBadge = (cost) => {
-    switch (cost) {
-      case "Active":
-        return "success";
-      case "Inactive":
-        return "secondary";
-      case "Pending":
-        return "warning";
-      case "Banned":
-        return "danger";
-      default:
-        return "primary";
-    }
-  };
+  // const getBadge = (cost) => {
+  //   switch (cost) {
+  //     case "Active":
+  //       return "success";
+  //     case "Inactive":
+  //       return "secondary";
+  //     case "Pending":
+  //       return "warning";
+  //     case "Banned":
+  //       return "danger";
+  //     default:
+  //       return "primary";
+  //   }
+  // };
+
+  const takeMeToAssignment = () => {
+    props.dispatchAction("assignmentBeingAdded")
+  }
+
+  let counter = 86
 
   return (
     <>
       
 
-      <CButton
-        color="success"
-        onClick={(event) => (window.location.href = "/#/InventoryAssignmentEdit")}
-      >
-        <strong>ADD+</strong>
-      </CButton>
+      
 
       <CCard>
         <CCardBody>
@@ -108,35 +108,30 @@ const InventoryAssignment = () => {
             sorter
             pagination
             scopedSlots={{
-              cost: (item) => (
-                <td>
-                  <CBadge color={getBadge(item.cost)}>{item.cost}</CBadge>
-                </td>
-              ),
-
-              show_details: (item, index) => {
+              progress: (item) => {
+                const counter = (100 * parseInt(item.sum)) / parseInt(item.total_quantity) 
                 return (
-                  <td className="py-2">
-                    <CButton
-                      color="primary"
-                      variant="outline"
-                      shape="square"
-                      size="sm"
-                      onClick={(event) =>
-                        (window.location.href = "/#/InventoryListEdit")
-                      }
-                    >
-                      {details.includes(index) ? "Hide" : "Edit"}
-                    </CButton>
-                  </td>
-                );
-              },
-            }}
+                <td>
+                <CProgress showPercentage='true' striped color="warning" value={counter} className="mb-1 bg-white" />
+
+                </td>
+              )}}
+            }
           />
 
           <CRow></CRow>
         </CCardBody>
+        <CCardFooter><CButton
+        color="success"
+        onClick={ event =>{
+          takeMeToAssignment()}
+        }
+      >
+        <strong>ADD+</strong>
+      </CButton></CCardFooter>
       </CCard>
+      
+      
     </>
   );
 };

@@ -43,7 +43,7 @@ module.exports = (db) => {
 
   // Get all vendors based on vendor name
   const getVendors = () => {
-    const sql = { text: `SELECT vendor_name FROM vendors;` };
+    const sql = { text: `SELECT id, vendor_name FROM vendors;` };
     // const sql = { text: `SELECT * FROM vendors WHERE vendor_name = $1;` };
 
     return db
@@ -87,19 +87,19 @@ module.exports = (db) => {
     .catch((err) => err);
   }
 
-  const postInventoryAssignments = () => {
-    const sql = {
-      text: `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
-    }
+  const postInventoryAssignments = (req) => {
+    const sql = 
+      `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`
+      const params = [parseInt(req.item_id), parseInt(req.vendor_id), parseInt(req.assigned_quantity), parseInt(req.price), req.order_date];
     return db
-    .query(sql)
+    .query(sql, params)
     .then((result) => result.rows)
     .catch((err) => err);
   }
 
   const joinedInventoryAssignments = () => {
     const sql = {
-      text: `SELECT SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_name, total_quantity;`
+      text: `SELECT order_items.item_id, SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_id, item_name, total_quantity;`
     }
     return db
     .query(sql)
