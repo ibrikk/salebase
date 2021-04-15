@@ -57,8 +57,8 @@ return array;
     datasets: [
       {
         data: [789, 468, 382, 344, 322],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB",],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB"],
+        backgroundColor: ["#E64040", "#E67d40", "#E6d540", "#82E640", "#40C2E6",],
+        hoverBackgroundColor: ["#E64040", "#E67d40", "#E6d540", "#82E640", "#40C2E6"],
         label: "Top Neighborhood",
       },
     ],
@@ -69,10 +69,10 @@ return array;
     datasets: [
       {
         label: "Top Selling Product",
-        backgroundColor: "rgba(255,99,132,0.2)",
-        borderColor: "rgba(255,99,132,1)",
+        backgroundColor: ["#E64040", "#E67d40", "#E6d540", "#82E640", "#40C2E6",],
+        borderColor: ["#EBf5f7"],
         borderWidth: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBackgroundColor: ["#E64040", "#E67d40", "#E6d540", "#82E640", "#40C2E6",],
         hoverBorderColor: "rgba(255,99,132,1)",
         data: topSumMap(products),
       },
@@ -85,18 +85,18 @@ return array;
         label: "Top Products By Month",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: "#E64040",
+        borderColor: "#E64040",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
-        pointBorderColor: "rgba(75,192,192,1)",
-        pointBackgroundColor: "#fff",
+        pointBorderColor: "#E64040",
+        pointBackgroundColor: "#E64040",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBackgroundColor: "#E64040",
+        pointHoverBorderColor: ["#E64040", "#E67d40", "#E6d540", "#82E640", "#40C2E6",],
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
@@ -117,8 +117,8 @@ return array;
               <div className="chart-wrapper">
                 <CChart
                   type="line"
-                  datasets={bar.datasets}
-                  labels={bar.labels}
+                  datasets={line.datasets}
+                  labels={line.labels}
                 />
               </div>
             </div>
