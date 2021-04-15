@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import '../../scss/style.scss';
 import {
   CCard,
   CCardBody,
@@ -9,7 +9,6 @@ import {
   // CButtonGroup,
   // CCardFooter,
   // CCardHeader,
-  // CCol,
   // CProgress,
   // CCallout
 } from "@coreui/react";
@@ -110,10 +109,11 @@ return array;
 
   return (
     <>
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <div className="col-md-6">
+      <CCard >
+        <CCardBody >
+        <div className='charts'>
+          <CRow >
+            <div className="col-md-8">
               <div className="chart-wrapper">
                 <CChart
                   type="line"
@@ -123,7 +123,7 @@ return array;
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-lg-8">
               <div className="chart-wrapper">
                 <CChart
                   type="pie"
@@ -135,7 +135,7 @@ return array;
             </div>
 
 
-            <div className="col-lg-12">
+            <div className="col-lg-8">
               <div className="bar-wrapper">
                 <CChart
                   type="bar"
@@ -147,6 +147,7 @@ return array;
             </div>
 
           </CRow>
+          </div>
         </CCardBody>
       </CCard>
     </>
