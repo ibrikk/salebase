@@ -21,6 +21,7 @@ console.log("process env", process.env);
 const itemsRouter = require("./routes/items");
 const getInventoryAssignments = require("./routes/items-assign");
 const biRouter = require("./routes/bi");
+const biRouterNeighbourhoods = require("./routes/neighbourhoods");
 const getVendors = require("./routes/vendors");
 
 const app = express();
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/items", itemsRouter(dbHelpers));
 app.use("/items-assign", getInventoryAssignments(dbHelpers));
 app.use("/bi", biRouter(dbHelpers));
+app.use("/neighbourhoods", biRouterNeighbourhoods(dbHelpers));
 app.use("/vendors", getVendors(dbHelpers));
 
 

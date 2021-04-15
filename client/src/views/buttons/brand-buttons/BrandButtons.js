@@ -113,7 +113,7 @@ const BrandButtons = () => {
               <CButton size="sm" className="btn-yahoo btn-brand mr-1 mb-1"><CIcon size="sm" name="cib-yahoo" /></CButton>
               <CButton size="sm" className="btn-behance btn-brand mr-1 mb-1"><CIcon size="sm" name="cib-behance" /></CButton>
               <CButton size="sm" className="btn-reddit btn-brand mr-1 mb-1"><CIcon size="sm" name="cib-reddit" /></CButton>
-              <CButton size="sm" className="btn-vimeo btn-brand mr-1 mb-1"><CIcon size="sm" name="cib-vimeo" /></CButton>
+              <CButton size="sm"e className="btn-vimeo btn-brand mr-1 mb-1"><CIcon size="sm" name="cib-vimeo" /></CButton>
             </p>
             <h6>Size Normal</h6>
             <p>
