@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { CContainer, CFade } from "@coreui/react";
@@ -15,6 +15,12 @@ const loading = (
 const TheContent = () => {
   const history = useHistory();
 
+  useEffect(() => {
+if (myState.isLoggedIn === false) {
+  // history.push("/login")
+}
+
+  }, []);
   //
   //
   // Redux replacement (Shared state)
@@ -23,7 +29,7 @@ const TheContent = () => {
     itemList: [],
     vendorList: [],
     itemAssignment: [],
-    login: '',
+    isLoggedIn: false,
 
   };
 
@@ -54,7 +60,12 @@ const TheContent = () => {
       // myState.assignmentBeingAdded = data;
       history.push("/InventoryList")
     }
-    
+    if (action === "isLoggedIn") {
+      myState.isLoggedIn = true;
+      history.push("/InventoryList")
+      console.log(3)
+    }
+
 
     // if (action === "assignItemDropdown") {
     //   myState.assignItemDropdown = data;

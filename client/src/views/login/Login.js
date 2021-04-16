@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useHistory } from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -16,8 +16,10 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
-const Login = (props) => {
+const Login = () => {
+
   const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,12 +28,18 @@ const Login = (props) => {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    //event.preventDefault();
+    console.log(1)
+    if(email === 'admin' && password === 'admin') {
+      history.push({pathname: '/InventoryList',
+    state: {isLoggedIn: true}
+    })
+
+      console.log(2)
+    }
   }
 
-  if(email === 'admin' && password === 'admin') {
-    history.push("/InventoryList")
-  }
+
 
 
   return (
@@ -53,7 +61,7 @@ const Login = (props) => {
                       </CInputGroupPrepend>
                       <CInput
                         type="text"
-
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Username"
                         autoComplete="username"
@@ -70,14 +78,15 @@ const Login = (props) => {
                         placeholder="Password"
                         autoComplete="current-password"
                          onChange={(e) => setPassword(e.target.value)}
-
+                        value={password}
                       />
 
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                         <CButton color="primary" className="px-4"
+                         <CButton type='submit' color="primary" className="px-4"
                         disabled={!validateForm()}
+
                         >
                           Login
                          </CButton>

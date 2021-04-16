@@ -36,6 +36,7 @@ const InventoryList = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    console.log(props.location.state.isLoggedIn)
     axios.get("http://localhost:3002/items").then((res) => {
       console.log(res.data.items);
       setData(res.data.items);

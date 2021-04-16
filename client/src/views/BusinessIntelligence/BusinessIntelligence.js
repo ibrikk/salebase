@@ -8,7 +8,7 @@ import {
   // CButton,
   // CButtonGroup,
   // CCardFooter,
-  // CCardHeader,
+  CCardHeader,
   // CProgress,
   // CCallout
 } from "@coreui/react";
@@ -74,7 +74,7 @@ const BusinessIntelligence = () => {
     labels: topItemsMap(products),
     datasets: [
       {
-        label: "Top Selling Product",
+        label: "",
         backgroundColor: [
           "#E64040",
           "#E67d40",
@@ -100,7 +100,7 @@ const BusinessIntelligence = () => {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        label: "Top Products By Month",
+        label: "",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "#E64040",
@@ -141,44 +141,55 @@ const BusinessIntelligence = () => {
 
   return (
     <>
-      <CCard>
-        <CCardBody>
-          <div className="charts">
-            <CRow>
-              <div className="col-md-8">
-                <div className="chart-wrapper">
-                  <CChart
-                    type="line"
-                    datasets={line.datasets}
-                    labels={line.labels}
-                  />
-                </div>
-              </div>
+      <div className="row">
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Assignments By Month</CCardHeader>
+            <CCardBody>
+              <div className="chart-wrapper">
+                <CChart
+                  type="line"
+                  datasets={line.datasets}
+                  labels={line.labels}
+                />
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Assignments By Vendor</CCardHeader>
+            <CCardBody>
+              <div className="chart-wrapper">
+                <CChart
+                  type="pie"
+                  datasets={pie.datasets}
+                  labels={pie.labels}
+                />
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Top Selling Products</CCardHeader>
+            <CCardBody>
+              <div className="bar-wrapper">
+                <CChart
+                  type="bar"
+                  datasets={bar.datasets}
+                  labels={bar.labels}
+                  //options={options}
+                />
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
+      </div>
 
-              <div className="col-lg-8">
-                <div className="chart-wrapper">
-                  <CChart
-                    type="pie"
-                    datasets={pie.datasets}
-                    labels={pie.labels}
-                  />
-                </div>
-              </div>
 
-              <div className="col-lg-8">
-                <div className="bar-wrapper">
-                  <CChart
-                    type="bar"
-                    datasets={bar.datasets}
-                    labels={bar.labels}
-                    //options={options}
-                  />
-                </div>
-              </div>
-            </CRow>
-          </div>
-        </CCardBody>
-      </CCard>
     </>
   );
 };
