@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { CContainer, CFade } from "@coreui/react";
@@ -15,6 +15,15 @@ const loading = (
 const TheContent = () => {
   const history = useHistory();
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (myState.isLoggedIn === false) {
+        history.push("/login")
+     }
+    }, 300);
+
+
+  }, []);
   //
   //
   // Redux replacement (Shared state)
@@ -23,7 +32,8 @@ const TheContent = () => {
     itemList: [],
     vendorList: [],
     itemAssignment: [],
-    
+    isLoggedIn: false,
+
   };
 
   // This function is used by all child views to be able to talk to the parent
@@ -53,7 +63,11 @@ const TheContent = () => {
       // myState.assignmentBeingAdded = data;
       history.push("/InventoryList")
     }
-    
+    if (action === "isLoggedIn") {
+      myState.isLoggedIn = true;
+    }
+
+
     // if (action === "assignItemDropdown") {
     //   myState.assignItemDropdown = data;
     // }

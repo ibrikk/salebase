@@ -8,7 +8,7 @@ import {
   // CButton,
   // CButtonGroup,
   // CCardFooter,
-  // CCardHeader,
+  CCardHeader,
   // CProgress,
   // CCallout
 } from "@coreui/react";
@@ -98,7 +98,7 @@ const BusinessIntelligence = () => {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        label: "Sales by Month",
+        label: "",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "#E64040",
