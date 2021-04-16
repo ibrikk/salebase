@@ -116,7 +116,7 @@ const BusinessIntelligence = () => {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [23, 26, 18, 53, 8, 2, 3],
+        data: [23, 26, 18, 53, 67, 84, 93],
       },
     ],
   };
@@ -126,34 +126,41 @@ const BusinessIntelligence = () => {
 
   return (
     <>
-      <CCard >
-        <CCardBody >
-        <div className='charts'>
-
-          <CRow >
-
-            <div className="col-md-8">
+     <div className="row">
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Sales by Month</CCardHeader>
+            <CCardBody>
               <div className="chart-wrapper">
                 <CChart
                   type="line"
                   datasets={line.datasets}
                   labels={line.labels}
                 />
-              </div>
-            </div>
-
-            <div className="col-lg-8">
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Top Neighbourhoods</CCardHeader>
+            <CCardBody>
               <div className="chart-wrapper">
                 <CChart
                   type="pie"
                   datasets={pie.datasets}
                   labels={pie.labels}
                 />
-
-              </div>
-            </div>
-
-            <div className="col-lg-8">
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6">
+          <CCard>
+          <CCardHeader>Top Selling Products</CCardHeader>
+            <CCardBody>
               <div className="bar-wrapper">
                 <CChart
                   type="bar"
@@ -161,10 +168,17 @@ const BusinessIntelligence = () => {
                   labels={bar.labels}
                   //options={options}
                 />
-              </div>
-            </div>
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+        </div>
 
-            <div className="col-lg-8">
+
+      {/* <div className="row"> */}
+         <div className="col-6">
+          <CCard>
+          <CCardHeader>Top Vendors</CCardHeader>
+            <CCardBody>
               <div className="bar-wrapper">
                 <CChart
                   type="bar"
@@ -172,13 +186,12 @@ const BusinessIntelligence = () => {
                   labels={bar2.labels}
                   //options={options}
                 />
-              </div>
-            </div>
-
-          </CRow>
-          </div>
-        </CCardBody>
-      </CCard>
+              </div>{" "}
+            </CCardBody>
+          </CCard>
+         </div>
+         </div>
+      {/* </div> */}
     </>
   );
 };
