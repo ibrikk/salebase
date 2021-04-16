@@ -29,13 +29,13 @@ const Login = () => {
 
   function handleSubmit(event) {
     //event.preventDefault();
-    console.log(1)
+    
     if(email === 'admin' && password === 'admin') {
       history.push({pathname: '/InventoryList',
     state: {isLoggedIn: true}
     })
 
-      console.log(2)
+
     }
   }
 

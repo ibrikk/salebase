@@ -1,5 +1,6 @@
 import React, { lazy, useState, useEffect } from "react";
 import axios from "axios";
+import _ from "lodash";
 
 import {
   CCard,
@@ -36,12 +37,13 @@ const InventoryList = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(props.location.state.isLoggedIn)
-    axios.get("http://localhost:3002/items").then((res) => {
-      console.log(res.data.items);
-      setData(res.data.items);
-      props.dispatchAction("updateItemList", res.data.items);
-    });
+    if (_.get(props, "location.state.isLoggedIn", false) || _.get(props, 'myState.isLoggedIn', false)) {
+      props.dispatchAction("isLoggedIn");
+      axios.get("http://localhost:3002/items").then((res) => {
+        setData(res.data.items);
+        props.dispatchAction("updateItemList", res.data.items);
+      });
+    }
   }, []);
 
   //const [details] = useState([]);
@@ -136,8 +138,6 @@ const InventoryList = (props) => {
               },
             }}
           />
-
-
         </CCardBody>
         <CCardFooter>
           <CButton

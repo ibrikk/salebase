@@ -16,9 +16,12 @@ const TheContent = () => {
   const history = useHistory();
 
   useEffect(() => {
-if (myState.isLoggedIn === false) {
-  // history.push("/login")
-}
+    setTimeout(() => {
+      if (myState.isLoggedIn === false) {
+        history.push("/login")
+     }
+    }, 300);
+
 
   }, []);
   //
@@ -62,8 +65,6 @@ if (myState.isLoggedIn === false) {
     }
     if (action === "isLoggedIn") {
       myState.isLoggedIn = true;
-      history.push("/InventoryList")
-      console.log(3)
     }
 
 
