@@ -5,7 +5,7 @@ import {
   CCard,
   CCardBody,
   CRow,
-  CSpinner,
+  // CSpinner,
   // CNavbar,
   // CToggler,
   // CCollapse,
