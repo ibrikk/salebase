@@ -109,11 +109,14 @@ const InventoryListEdit = (props) => {
   };
 
   return (
-    <div>
-   {isLoading && <div className="d-flex justify-content-between align-items-center">
-      <CSpinner color="success" size="lg" />
+    <div >
+   {isLoading && <div className="d-flex justify-content-center">
+      <div>
+      <CSpinner color="success" size="lg"/>
       </div>
+    </div>
   }
+
   {isLoading === false &&
     <div>
       <CCard>
