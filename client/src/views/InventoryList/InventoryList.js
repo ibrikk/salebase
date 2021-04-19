@@ -33,7 +33,7 @@ import {
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 
 const InventoryList = (props) => {
-  // const [isOpen, setIsOpen] = useState(false);
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -46,19 +46,7 @@ const InventoryList = (props) => {
     }
   }, []);
 
-  //const [details] = useState([]);
-  // const [items, setItems] = useState(usersData)
-
-  // const toggleDetails = (index) => {
-  //   const position = details.indexOf(index);
-  //   let newDetails = details.slice();
-  //   if (position !== -1) {
-  //     newDetails.splice(position, 1);
-  //   } else {
-  //     newDetails = [...details, index];
-  //   }
-  //   setDetails(newDetails);
-  // };
+  
 
   const fields = [
     { key: "item_name", _style: { width: "40%" } },

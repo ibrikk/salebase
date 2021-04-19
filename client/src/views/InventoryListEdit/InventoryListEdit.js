@@ -7,34 +7,13 @@ import {
   CCardBody,
   CRow,
   CSpinner,
-  // CNavbar,
-  // CToggler,
-  // CCollapse,
-  // CNavbarNav,
-  // CForm,
-  // CInput,
   CButton,
-  // CDropdown,
-  // CDropdownToggle,
-  // CDropdownMenu,
-  // CDropdownItem,
-  // CNavbarBrand,
-  // CBadge,
-  // CDataTable,
   CCol,
   CContainer,
   CInput,
   CLabel,
   CForm,
   CFormGroup,
-  // CFormText,
-
-  // CButtonGroup,
-  // CCardFooter,
-  // CCardHeader,
-  // CCol,
-  // CProgress,
-  // CCallout
 } from "@coreui/react";
 
 const InventoryListEdit = (props) => {
@@ -46,8 +25,6 @@ const InventoryListEdit = (props) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-
-
 
   useEffect(() => {
     if (_.get(props, "myState.inventoryBeingEdited", false)) {
@@ -64,10 +41,9 @@ const InventoryListEdit = (props) => {
     }
   }, []);
 
-
   function sleeper(ms) {
-    return function(x) {
-      return new Promise(resolve => setTimeout(() => resolve(x), ms));
+    return function (x) {
+      return new Promise((resolve) => setTimeout(() => resolve(x), ms));
     };
   }
 
@@ -82,12 +58,13 @@ const InventoryListEdit = (props) => {
           setIsLoading(false);
         });
     } else {
-      axios.post("http://localhost:3002/items", inputValues)
-      .then(sleeper(1000))
-      .then((res) => {
-        props.dispatchAction("goToInventoryList");
-        setIsLoading(false);
-      });
+      axios
+        .post("http://localhost:3002/items", inputValues)
+        .then(sleeper(1000))
+        .then((res) => {
+          props.dispatchAction("goToInventoryList");
+          setIsLoading(false);
+        });
     }
   };
 
@@ -109,85 +86,84 @@ const InventoryListEdit = (props) => {
   };
 
   return (
-    <div >
-   {isLoading && <div className="d-flex justify-content-center">
-      <div>
-      <CSpinner color="success" size="lg"/>
-      </div>
-    </div>
-  }
-
-  {isLoading === false &&
     <div>
-      <CCard>
-        <CCardBody>
-          <h1>Inventory Management</h1>
-          <CContainer fluid>
-            <CRow>
-              <CCol sm="12">
-                <CForm>
-                  <CFormGroup>
-                    <CLabel htmlFor="name">Item Name</CLabel>
-                    <CInput
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Enter Item Name"
-                      value={inputValues.item_name || ""}
-                      onChange={(e) => {
-                        updateState("name", e.target.value);
-                      }}
-                    />
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="quantity">Quantity</CLabel>
-                    <CInput
-                      type="text"
-                      id="quantity"
-                      name="quantity"
-                      placeholder="Enter Quantity"
-                      value={inputValues.total_quantity || ""}
-                      onChange={(e) => {
-                        updateState("quantity", e.target.value);
-                      }}
-                    />
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="cost">Cost/lbs</CLabel>
-                    <CInput
-                      type="text"
-                      id="cost"
-                      name="cost"
-                      placeholder="Enter Cost per Pound"
-                      value={inputValues.cost || ""}
-                      onChange={(e) => {
-                        updateState("cost", e.target.value);
-                      }}
-                    />
-                  </CFormGroup>
-                </CForm>
-              </CCol>
-            </CRow>
-            <CButton
-              color="primary"
-              style={{ float: "right" }}
-              onClick={() => {
-                save();
-              }}
-            >
-              <strong>SAVE</strong>
-            </CButton>
-          </CContainer>
-        </CCardBody>
-      </CCard>
+      {isLoading && (
+        <div className="d-flex justify-content-center">
+          <div>
+            <CSpinner color="success" size="lg" />
+          </div>
+        </div>
+      )}
 
+      {isLoading === false && (
+        <div>
+          <CCard>
+            <CCardBody>
+              <h1>Inventory Management</h1>
+              <CContainer fluid>
+                <CRow>
+                  <CCol sm="12">
+                    <CForm>
+                      <CFormGroup>
+                        <CLabel htmlFor="name">Item Name</CLabel>
+                        <CInput
+                          type="text"
+                          id="name"
+                          name="name"
+                          placeholder="Enter Item Name"
+                          value={inputValues.item_name || ""}
+                          onChange={(e) => {
+                            updateState("name", e.target.value);
+                          }}
+                        />
+                      </CFormGroup>
+                      <CFormGroup>
+                        <CLabel htmlFor="quantity">Quantity</CLabel>
+                        <CInput
+                          type="text"
+                          id="quantity"
+                          name="quantity"
+                          placeholder="Enter Quantity"
+                          value={inputValues.total_quantity || ""}
+                          onChange={(e) => {
+                            updateState("quantity", e.target.value);
+                          }}
+                        />
+                      </CFormGroup>
+                      <CFormGroup>
+                        <CLabel htmlFor="cost">Cost/lbs</CLabel>
+                        <CInput
+                          type="text"
+                          id="cost"
+                          name="cost"
+                          placeholder="Enter Cost per Pound"
+                          value={inputValues.cost || ""}
+                          onChange={(e) => {
+                            updateState("cost", e.target.value);
+                          }}
+                        />
+                      </CFormGroup>
+                    </CForm>
+                  </CCol>
+                </CRow>
+                <CButton
+                  color="primary"
+                  style={{ float: "right" }}
+                  onClick={() => {
+                    save();
+                  }}
+                >
+                  <strong>SAVE</strong>
+                </CButton>
+              </CContainer>
+            </CCardBody>
+          </CCard>
 
-
-      <CCard>
-        <CCardBody></CCardBody>
-      </CCard>
-    </div>
-            }
+          <CCard>
+            <CCardBody></CCardBody>
+          </CCard>
+        </div>
+      )}
     </div>
   );
 };
