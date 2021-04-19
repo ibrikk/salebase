@@ -49,9 +49,9 @@ const InventoryAssignment = (props) => {
   }, []);
 
 
-  
 
-  
+
+
 
   const fields = [
     { key: "item_name", label: "Item Name", _style: { width: "30%" } },
@@ -90,9 +90,9 @@ const InventoryAssignment = (props) => {
 
   return (
     <>
-      
 
-      
+
+
 
       <CCard>
         <CCardBody>
@@ -109,7 +109,7 @@ const InventoryAssignment = (props) => {
             pagination
             scopedSlots={{
               progress: (item) => {
-                const counter = (100 * parseInt(item.sum)) / parseInt(item.total_quantity) 
+                const counter = (100 * parseInt(item.sum)) / parseInt(item.total_quantity)
                 return (
                 <td>
                 <CProgress showPercentage='true' striped color="warning" value={counter} className="mb-1 bg-white" />
@@ -122,6 +122,7 @@ const InventoryAssignment = (props) => {
           <CRow></CRow>
         </CCardBody>
         <CCardFooter><CButton
+        style={{float: 'right'}}
         color="success"
         onClick={ event =>{
           takeMeToAssignment()}
@@ -130,8 +131,8 @@ const InventoryAssignment = (props) => {
         <strong>ADD+</strong>
       </CButton></CCardFooter>
       </CCard>
-      
-      
+
+
     </>
   );
 };

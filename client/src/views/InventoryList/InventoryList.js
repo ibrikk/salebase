@@ -141,6 +141,7 @@ const InventoryList = (props) => {
         </CCardBody>
         <CCardFooter>
           <CButton
+          style={{float: 'right'}}
             color="success"
             onClick={(event) => {
               editOrAddButtonPressed();
