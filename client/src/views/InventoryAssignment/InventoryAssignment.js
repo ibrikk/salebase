@@ -46,7 +46,6 @@ const InventoryAssignment = (props) => {
     props.dispatchAction("assignmentBeingAdded");
   };
 
-  let counter = 86;
 
   return (
     <>

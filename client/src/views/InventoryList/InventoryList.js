@@ -5,39 +5,22 @@ import _ from "lodash";
 import {
   CCard,
   CCardBody,
-  CRow,
-  CLink,
-  // CNavbar,
-  // CToggler,
-  // CCollapse,
-  // CNavbarNav,
-  // CForm,
-  // CInput,
   CButton,
-  // CDropdown,
-  // CDropdownToggle,
-  // CDropdownMenu,
-  // CDropdownItem,
-  // CNavbarBrand,
   CBadge,
   CDataTable,
-
-  // CButtonGroup,
   CCardFooter,
-  // CCardHeader,
-  // CCol,
-  // CProgress,
-  // CCallout
 } from "@coreui/react";
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 
 const InventoryList = (props) => {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (_.get(props, "location.state.isLoggedIn", false) || _.get(props, 'myState.isLoggedIn', false)) {
+    if (
+      _.get(props, "location.state.isLoggedIn", false) ||
+      _.get(props, "myState.isLoggedIn", false)
+    ) {
       props.dispatchAction("isLoggedIn");
       axios.get("http://localhost:3002/items").then((res) => {
         setData(res.data.items);
@@ -45,8 +28,6 @@ const InventoryList = (props) => {
       });
     }
   }, []);
-
-  
 
   const fields = [
     { key: "item_name", _style: { width: "40%" } },
@@ -129,7 +110,7 @@ const InventoryList = (props) => {
         </CCardBody>
         <CCardFooter>
           <CButton
-          style={{float: 'right'}}
+            style={{ float: "right" }}
             color="success"
             onClick={(event) => {
               editOrAddButtonPressed();
