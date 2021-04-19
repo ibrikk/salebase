@@ -121,7 +121,7 @@ const InventoryListEdit = (props) => {
     <div>
       <CCard>
         <CCardBody>
-          <h1>InventoryListEdit</h1>
+          <h1>Inventory Management</h1>
           <CContainer fluid>
             <CRow>
               <CCol sm="12">
