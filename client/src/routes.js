@@ -52,7 +52,7 @@ const Login = React.lazy(() => import('./views/login/Login.js'));
 
 const routes = [
   // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/inventoryList', name: 'InventoryList Dashboard', component: InventoryList },
+  { path: '/inventoryList', name: 'Inventory Management Dashboard', component: InventoryList },
   { path: '/InventoryAssignment', name: 'InventoryAssignemnt Dashboard', component: InventoryAssignment },
   { path: '/BusinessIntelligence', name: 'Business Intelligence', component: BusinessIntelligence },
   { path: '/AboutUs', name: 'About Us', component: AboutUs },
