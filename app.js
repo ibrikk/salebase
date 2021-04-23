@@ -11,8 +11,16 @@ const PORT = process.env.PORT || 3002;
 
 // PG database client/connection setup
 const { Pool } = require("pg");
+
+const devConfig = `postgresql://${process.env.DB_USER}://${process.env.DB_PASSWORD}:${process.env.DB_HOST}:${process.env.DB_PORT}:${process.env.DB_DATABASE}`;
+const proConfig = process.env.DATABASE_URL; // heroku addons
+
 const dbParams = require("./lib/db");
-const dataBase = new Pool(dbParams);
+const dataBase = new Pool({
+  connectionString:
+    process.env.NODE_ENV === "production" ? proConfig : devConfig,
+});
+
 dataBase.connect((err) => console.log("connected", err));
 const dbHelpers = require("./helpers/dbHelpers")(dataBase);
 console.log("db connection test", dbParams);
@@ -26,8 +34,13 @@ const getVendors = require("./routes/vendors");
 
 const app = express();
 app.use(cors());
-// const port = normalizePort(process.env.PORT || "3001");
+
 app.set("port", PORT);
+
+//deployment setup
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "client/build")));
+// }
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -37,15 +50,12 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter(dbHelpers));
 app.use("/items", itemsRouter(dbHelpers));
 app.use("/items-assign", getInventoryAssignments(dbHelpers));
 app.use("/bi", biRouter(dbHelpers));
 app.use("/neighbourhoods", biRouterNeighbourhoods(dbHelpers));
 app.use("/vendors", getVendors(dbHelpers));
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
