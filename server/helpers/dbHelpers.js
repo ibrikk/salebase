@@ -33,6 +33,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  // Update items
   const putItems = (req) => {
     const sql = `UPDATE items SET item_name = '${req.item_name}',
     total_quantity = '${parseInt(req.total_quantity)}', cost='${parseInt(
@@ -49,7 +50,6 @@ module.exports = (db) => {
   // Get all vendors based on vendor name
   const getVendors = () => {
     const sql = { text: `SELECT id, vendor_name FROM vendors;` };
-    // const sql = { text: `SELECT * FROM vendors WHERE vendor_name = $1;` };
 
     return db
       .query(sql)
@@ -82,6 +82,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  //Get all item assignment info: FETCH
   const getInventoryAssignments = () => {
     const sql = {
       text: `SELECT * FROM order_items;`,
@@ -92,6 +93,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  //Post an inventory item
   const postInventoryAssignments = (req) => {
     const sql = `INSERT INTO order_items (item_id, vendor_id, assigned_quantity, price, order_date) VALUES($1, $2, $3, $4, $5);`;
     const params = [
@@ -107,6 +109,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  //Get item assignment info for the Assignment Page
   const joinedInventoryAssignments = () => {
     const sql = {
       text: `SELECT order_items.item_id, SUM(order_items.assigned_quantity), items.item_name, items.total_quantity FROM items INNER JOIN order_items ON order_items.item_id=items.id GROUP BY item_id, item_name, total_quantity;`,
@@ -116,13 +119,10 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
 
-    // const queries = [db.query(`SELECT total_quantity FROM items;`), db.query(`SELECT assigned_quantity FROM order_items;`)];
-
-    // Promise.all(queries)
-    // .then((result) => result[0].rows, result[1].rows)
-    // .catch((err) => err);
   };
 
+
+  //Get top-selling items for the Business Intelligence Page
   const getTopItemsBI = () => {
     const sql = {
       text: `SELECT SUM(order_items.assigned_quantity), items.item_name
@@ -140,6 +140,8 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+
+  //Get top neighbourhoods
   const getTopNeighborhood = () => {
     const sql = {
       text: `SELECT SUM(order_items.assigned_quantity), vendors.city_name

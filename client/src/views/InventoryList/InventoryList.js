@@ -58,6 +58,7 @@ const InventoryList = (props) => {
     }
   };
 
+  //Acton dispatch whenever Edit or Add buttons are clicked
   const editOrAddButtonPressed = (data) => {
     props.dispatchAction("dataForInventoryBeingEdited", data);
   };

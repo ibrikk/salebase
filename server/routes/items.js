@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  // const dbHelpers = require("../helpers/dbHelpers")(db);
-  /* GET items listing. Homepage */
+  /* GET items listing */
   router.get("/", function (req, res, next) {
     db.getItems().then((response) => {
-      //console.log("response", response);
       res.json({ items: response });
     });
   });
@@ -22,13 +20,9 @@ module.exports = (db) => {
 
   router.put("/:id", function (req, res, next) {
     db.putItems(req.body).then((response) => {
-      //console.log("response", response);
       res.json({ items: response });
     });
   });
 
-  // router.delete("/:id", function (req, res, next) {
-  //   res.send({ text: "This delete items route!" });
-  // });
   return router;
 };

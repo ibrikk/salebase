@@ -16,6 +16,7 @@ import {
   CCardHeader,
 } from "@coreui/react";
 
+
 const InventoryAssignmentEdit = (props) => {
   const [inputValues, setInputValues] = useState({
     assigned_quantity: "",
@@ -46,6 +47,7 @@ const InventoryAssignmentEdit = (props) => {
       });
   };
 
+  //Get availabe quantity of items
   const getAvailableQuantityByItemId = (itemId) => {
     const itemList = _.get(props, "myState.itemList", []);
     const itemAssignment = _.get(props, "myState.itemAssignment", []);
@@ -64,6 +66,8 @@ const InventoryAssignmentEdit = (props) => {
     return availableQuantity;
   };
 
+
+  //Get a total quantity of items
   const getTotalQuantityByItemId = (itemId) => {
     const itemList = _.get(props, "myState.itemList", []);
     let parsedItemId = parseInt(itemId);
