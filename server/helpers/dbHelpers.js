@@ -19,7 +19,7 @@ module.exports = (db) => {
 
   //Post items
   const postItems = (req) => {
-    const sql = `INSERT INTO items (item_name, total_quantity, cost) VALUES ($1, $2, $3, $4);`;
+    const sql = `INSERT INTO items (item_name, total_quantity, cost) VALUES ($1, $2, $3);`;
     console.log(sql);
     const params = [
       req.item_name,
