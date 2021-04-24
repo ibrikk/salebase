@@ -28,10 +28,10 @@ const BusinessIntelligence = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3002/bi").then((res) => {
+    axios.get("/bi").then((res) => {
       setProducts(res.data.items);
     });
-    axios.get("http://localhost:3002/bi/neighbourhood").then((res) => {});
+    axios.get("/bi/neighbourhood").then((res) => {});
   }, []);
 
   const pie = {

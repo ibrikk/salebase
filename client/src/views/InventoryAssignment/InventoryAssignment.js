@@ -16,14 +16,14 @@ const InventoryAssignment = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/items-assign").then((res) => {
+    axios.get("/items-assign").then((res) => {
       setData(res.data.items);
       props.dispatchAction("updateItemAssignment", res.data.items);
     });
-    axios.get("http://localhost:3002/items").then((res) => {
+    axios.get("/items").then((res) => {
       props.dispatchAction("updateItemList", res.data.items);
     });
-    axios.get("http://localhost:3002/vendors").then((res) => {
+    axios.get("/vendors").then((res) => {
       props.dispatchAction("updateVendorList", res.data.vendors);
     });
   }, []);

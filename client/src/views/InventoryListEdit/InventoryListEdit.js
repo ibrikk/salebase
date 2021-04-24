@@ -51,7 +51,7 @@ const InventoryListEdit = (props) => {
     setIsLoading(true);
     if (inputValues.id !== null) {
       axios
-        .put(`http://localhost:3002/items/${inputValues.id}`, inputValues)
+        .put(`/items/${inputValues.id}`, inputValues)
         .then(sleeper(1000))
         .then((res) => {
           props.dispatchAction("goToInventoryList");
@@ -59,7 +59,7 @@ const InventoryListEdit = (props) => {
         });
     } else {
       axios
-        .post("http://localhost:3002/items", inputValues)
+        .post("/items", inputValues)
         .then(sleeper(1000))
         .then((res) => {
           props.dispatchAction("goToInventoryList");
