@@ -22,7 +22,7 @@ const InventoryList = (props) => {
       _.get(props, "myState.isLoggedIn", false)
     ) {
       props.dispatchAction("isLoggedIn");
-      axios.get("http://localhost:3002/items").then((res) => {
+      axios.get("/items").then((res) => {
         setData(res.data.items);
         props.dispatchAction("updateItemList", res.data.items);
       });

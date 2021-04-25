@@ -41,7 +41,7 @@ const InventoryAssignmentEdit = (props) => {
 
   const save = () => {
     axios
-      .post(`http://localhost:3002/items-assign`, inputValues)
+      .post(`/items-assign`, inputValues)
       .then((res) => {
         props.dispatchAction("goToInventoryAssignment");
       });
