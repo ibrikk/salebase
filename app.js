@@ -5,7 +5,7 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const db = require("./lib/db");
+
 
 const PORT = process.env.PORT || 3002;
 
