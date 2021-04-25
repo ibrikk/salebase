@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3002;
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const dataBase = new Pool(dbParams);
-dataBase.connect((err) => console.log("connected", err));
+dataBase.connect((err) => console.log("Error while connecting to DB", err));
 const dbHelpers = require("./helpers/dbHelpers")(dataBase);
 console.log("db connection test", dbParams);
 console.log("process env", process.env);
