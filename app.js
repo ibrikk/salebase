@@ -26,8 +26,14 @@ const getVendors = require("./routes/vendors");
 
 const app = express();
 app.use(cors());
-// const port = normalizePort(process.env.PORT || "3001");
 app.set("port", PORT);
+
+
+if (process.env.NODE_ENV === "production") {
+  //server static content
+  //npm run build
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
