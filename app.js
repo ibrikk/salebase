@@ -28,6 +28,7 @@ const app = express();
 app.use(cors());
 app.set("port", PORT);
 
+app.use(express.static(path.join(__dirname, "client/build")));
 
 if (process.env.NODE_ENV === "production") {
   //server static content
@@ -68,6 +69,11 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
