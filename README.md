@@ -5,6 +5,7 @@ A web app built with React.js, CoreUI, Express, and PostgreSQL that allows admin
 
 ![Screen-Recording-2021-04-23-at-4 (2)](https://user-images.githubusercontent.com/59522575/115929775-55e2c600-a456-11eb-9f0e-f5ff8c6a83a2.gif)
 
+This repo is forked from the original repo, in which I contributed as a collaborator. 
 
 ## Setup
 
