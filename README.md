@@ -1,6 +1,5 @@
 # Salebase
 
-[SaleBase - deployed](salebase.herokuapp.com)
 
 A web app built with React.js, CoreUI, Express, and PostgreSQL that allows admin users to manage Inventories
 
