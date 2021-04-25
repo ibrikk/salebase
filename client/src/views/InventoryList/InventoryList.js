@@ -27,7 +27,7 @@ const InventoryList = (props) => {
         props.dispatchAction("updateItemList", res.data.items);
       });
     }
-  }, []);
+  }, [props]);
 
   const fields = [
     { key: "item_name", _style: { width: "40%" } },
@@ -43,7 +43,7 @@ const InventoryList = (props) => {
     },
   ];
 
-window.location = '/';
+
 
   const getBadge = (cost) => {
     switch (cost) {
