@@ -43,6 +43,8 @@ const InventoryList = (props) => {
     },
   ];
 
+window.location = '/';
+
   const getBadge = (cost) => {
     switch (cost) {
       case cost > 20: //
